@@ -8,25 +8,10 @@
         <meta content="" name="keywords">
         <meta content="" name="description">
         <link href="img/favio.png" rel="shortcut icon" type="image/x-icon">
-
-        <!-- Google Web Fonts -->
-        <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
-        <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">  -->
-
-        <!-- Icon Font Stylesheet -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"> -->
-
-        <!-- Libraries Stylesheet -->
         <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-
-        <!-- Customized Bootstrap Stylesheet -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
     </head>
 
@@ -73,7 +58,7 @@
                     <div class="navbar-nav mx-auto">
                         <a href="index.php" class="nav-item nav-link active">Trang chủ</a>
                         <a href="product.php" class="nav-item nav-link">Sản phẩm</a>
-                        <a href="logout.php" class="nav-item nav-link">Đăng xuất</a>
+                        
                         <!-- <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -90,12 +75,30 @@
                             <i class="fas fa-search text-primary"></i>
                         </button>
                         <a href="#" class="position-relative me-4 my-auto">
-                            <i class="fa fa-shopping-bag fa-2x"></i>
+                            <i class="fa fa-shopping-cart  fa-2x"></i>
                             <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">0</span>
                         </a>
-                        <a href="login.php" class="my-auto">
-                            <i class="fas fa-user fa-2x"></i>
-                        </a>
+                        <!-- Nếu đã đăng nhập -->
+                        <?php if (isset($_SESSION["MAND"])): ?>                
+                            <span class="button-wrapper">
+                            <a href="logout.php" class="my-auto" style="margin-right: 20px;">
+                                <i class="fas fa-sign-out-alt fa-2x"></i>
+                            </a>
+                            </span>
+                            <!-- Nếu chưa đang nhập -->
+                        <?php else: ?>
+                            <span class="button-wrapper">
+                                <a href="login.php" class="my-auto" style="margin-right: 20px;">
+                                    <i class="fas fa-user fa-2x"></i>
+                                </a>
+                            </span>
+
+                            <span class="button-wrapper">
+                                <a href="register.php" class="my-auto">
+                                    <i class="fas fa-user-plus fa-2x"></i>
+                                </a>
+                            </span>
+                            <?php endif; ?>
                     </div>
                 </div>
             </nav>
