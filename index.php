@@ -106,7 +106,7 @@
             </div>
             <div class="row g-4">
             <?php
-            $result = mysqli_query($conn, "SELECT * FROM sanpham WHERE SALE > 0");
+            $result = mysqli_query($conn, "SELECT * FROM sanpham WHERE SALE > 0 LIMIT 6");
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     $tenSP = $row['TENSP'];
