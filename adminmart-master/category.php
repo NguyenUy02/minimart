@@ -48,8 +48,8 @@ include 'db_connect.php';
                 echo '<td>' . $row['MALSP'] . '</td>';
                 echo '<td>' . $row['TENLSP'] . '</td>';
                 echo '<td>';
-                echo '<a href="./category_edit.php?maSP=' . $row['MALSP'] . '"><button class="btn btn-success btn-sm edit btn-flat"><i class="fa fa-edit"></i> Sửa</button></a>';
-                echo '<a href="./category_delete.php?maSP=' . $row['MALSP'] . '"><button class="btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Xoá</button></a>';
+                echo '<a href="./category_edit.php?maLSP=' . $row['MALSP'] . '"><button class="btn btn-success btn-sm edit btn-flat"><i class="fa fa-edit"></i> Sửa</button></a>';
+                echo '<a href="./category_delete.php?maLSP=' . $row['MALSP'] . '"><button class="btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Xoá</button></a>';
                 echo '</td>';
                 echo '</tr>';
             }
