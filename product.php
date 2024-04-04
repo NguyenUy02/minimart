@@ -9,9 +9,9 @@
                 <div class="row g-4">           
                     <div class="col-xl-3">
                         <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-                            <label for="fruits">Default Sorting:</label>
+                            <label for="fruits">Sắp xếp theo:</label>
                             <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-                                <option value="volvo">Nothing</option>
+                                <option value="volvo">Nổi bật</option>
                                 <option value="saab">Popularity</option>
                                 <option value="opel">Organic</option>
                                 <option value="audi">Fantastic</option>
@@ -24,13 +24,13 @@
                         <div class="row g-4">
                             <div class="col-lg-12">
                             <div class="mb-3">
-                                <h4>Categories</h4>
+                                <h5>Danh mục sản phẩm</h5>
                                 <ul class="list-unstyled fruite-categorie">
                                     <?php
                                     $result = mysqli_query($conn, "SELECT * FROM loaisanpham");
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $TENLSP = $row['TENLOAISP'];
+                                            $TENLSP = $row['TENLSP'];
                                     ?>
                                     <li>
                                         <div class="d-flex justify-content-between fruite-name">
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="mb-3">
-                                    <h4 class="mb-2">Price</h4>
+                                    <h4 class="mb-2">Giá</h4>
                                     <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="500" value="0" oninput="amount.value=rangeInput.value">
                                     <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
                                 </div>
