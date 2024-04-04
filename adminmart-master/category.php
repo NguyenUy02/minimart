@@ -22,10 +22,7 @@ include 'db_connect.php';
         <div style="margin-bottom: 10px; margin-left: 20px ">
         <a href="./category_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
     </div>
-
         <?php
-        
-
         // Truy vấn cơ sở dữ liệu để lấy danh sách loại sản phẩm
         $query = "SELECT * FROM loaisanpham";
         $result = mysqli_query($conn, $query);

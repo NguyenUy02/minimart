@@ -1,6 +1,7 @@
 <?php
 include 'header_admin.php'
 ?>
+<title>AdminMiniMart</title>
 <body>
         <div class="page-wrapper">
             <div class="page-breadcrumb">
@@ -89,10 +90,8 @@ include 'header_admin.php'
             
             </div>
         </div>
-    </div>
-    
+    </div>   
 </body>
-
 
 <?php
 include 'footer_admin.php'

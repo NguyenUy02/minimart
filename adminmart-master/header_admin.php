@@ -8,7 +8,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Adminmart Template - The Ultimate Multipurpose admin template</title>
     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
@@ -74,41 +73,35 @@
                         <li class="nav-small-cap"><span class="hide-menu">Quản lý</span></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link" href="product.php"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
+                                aria-expanded="false"><i data-feather="package" class="feather-icon"></i><span
                                     class="hide-menu">Sản phẩm
                                 </span></a>
                         </li>
-                        
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="category.php"
                                 aria-expanded="false"><i data-feather="grid" class="feather-icon"></i><span
-                                    class="hide-menu">Danh mục</span></a>
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="category.php" class="sidebar-link"><span
-                                            class="hide-menu"> Loại sản phẩm
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="brand.php" class="sidebar-link"><span
-                                            class="hide-menu"> Thương hiệu
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="users.php" class="sidebar-link"><span
-                                            class="hide-menu">
-                                            Người dùng
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="table-layout-coloured.html" class="sidebar-link"><span
-                                            class="hide-menu">
-                                            Hóa đơn
-                                        </span></a>
-                                </li>                      
-                            </ul>
+                                    class="hide-menu">Loại sản phẩm
+                                </span></a>
                         </li>
-                        
+                        <li class="sidebar-item"> <a class="sidebar-link" href="brand.php"
+                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
+                                    class="hide-menu">Thương hiệu
+                                </span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="users.php"
+                                aria-expanded="false"><i data-feather="user" class="feather-icon"></i><span
+                                    class="hide-menu">Tài khoản
+                                </span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="order.php"
+                                aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
+                                    class="hide-menu">Hóa đơn
+                                </span></a>
+                        </li>
                         <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">Đăng ký</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Thống kê</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
-                                aria-expanded="false"><i data-feather="lock" class="feather-icon"></i><span
-                                    class="hide-menu">Đăng ký
+                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                                    class="hide-menu">Thống kê
                                 </span></a>
                         </li>
                         

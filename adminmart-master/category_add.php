@@ -18,7 +18,6 @@ include 'db_connect.php';
 </head>
 <body>
     <div class="page-wrapper">
-
     <?php
     function isCategoryExists($conn, $tenLSP) {
         $tenLSP = mysqli_real_escape_string($conn, $tenLSP);
@@ -77,7 +76,7 @@ include 'db_connect.php';
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Thêm" class="btn btn-success" name="create" />
+                        <input type="submit" value="Thêm" class="btn btn-primary" name="create" />
                         <a href="javascript:history.go(-1);"><input type="button" value="Quay lại" class="btn btn-success" name="Quay lại" /></a>
                     </div>
                 </div>

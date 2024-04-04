@@ -19,7 +19,7 @@ include 'db_connect.php';
 <body>
     <div class="page-wrapper">
         <h1>Danh sách thương hiệu</h1>
-        <div style="margin-bottom: 10px; margin-left: 50px ">
+        <div style="margin-bottom: 10px; margin-left: 20px ">
         <a href="./brand_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
     </div>
 
@@ -57,7 +57,6 @@ include 'db_connect.php';
         } else {
             echo 'Không có loại sản phẩm nào.';
         }
-
         // Đóng kết nối cơ sở dữ liệu
         mysqli_close($conn);
         ?>
