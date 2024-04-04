@@ -19,8 +19,7 @@ include 'db_connect.php';
 <body>
     <div class="page-wrapper">
         <h1>Danh sách loại sản phẩm</h1>
-
-        <div style="margin-bottom: 10px; margin-left: 100px ">
+        <div style="margin-bottom: 10px; margin-left: 20px ">
         <a href="./category_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
     </div>
 
