@@ -26,7 +26,7 @@ include 'db_connect.php';
         $query = "SELECT s.MASP, s.TENSP, s.SOLUONG, s.GIA, s.SALE, s.ANH, t.TENTH, l.TENLSP
             FROM sanpham s
             INNER JOIN thuonghieu t ON s.MATH = t.MATH
-            INNER JOIN loaisanpham l ON s.MALSP = l.MALSP";
+            INNER JOIN loaisanpham l ON s.MALSP = l.MALSP ORDER BY s.MASP DESC";
             $result = mysqli_query($conn, $query);
 
         // Kiểm tra và hiển thị danh sách sản phẩm
@@ -58,9 +58,9 @@ include 'db_connect.php';
                 echo '<td>' . $row['TENLSP'] . '</td>';
                 echo '<td><img src="../img/' . $row['ANH'] . '" alt="Product Image" height="50" width="50"></td>';
                 echo '<td>';
-                echo '<a href="./product_Edit.php?maSP=' . $row['MASP'] . '"><button class="btn btn-success btn-sm edit btn-flat"><i class="fa fa-edit"></i> Sửa</button></a>';
-                echo '<a href="./product_Details.php?maSP=' . $row['MASP'] . '"><button class="btn btn-info btn-sm info btn-flat"><i class="fa fa-circle-info"></i> Chi tiết</button></a>';
-                echo '<a href="./product_Delete.php?maSP=' . $row['MASP'] . '"><button class="btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Xoá</button></a>';
+                echo '<a href="./product_edit.php?maSP=' . $row['MASP'] . '"><button class="btn btn-success btn-sm edit btn-flat"><i class="fa fa-edit"></i> Sửa</button></a>';
+                echo '<a href="./product_detail.php?maSP=' . $row['MASP'] . '"><button class="btn btn-info btn-sm info btn-flat"><i class="fa fa-circle-info"></i> Chi tiết</button></a>';
+                echo '<a href="./product_delete.php?maSP=' . $row['MASP'] . '"><button class="btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Xoá</button></a>';
                 echo '</td>';
                 echo '</tr>';
             }
