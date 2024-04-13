@@ -35,7 +35,7 @@
 
     <!-- Navbar start -->
     <div class="container-fluid fixed-top">
-        <div class="container topbar bg-primary d-none d-lg-block">
+        <div class="container topbar bg-success d-none d-lg-block">
             <div class="d-flex justify-content-between">
                 <div class="top-info ps-2">
                     <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">Nha Trang, khánh hòa</a></small>
@@ -50,13 +50,13 @@
         </div>
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                <a href="index.php" class="navbar-brand"><h1 class="text-primary display-6">Minimart</h1></a>
+                <a href="index.php" class="navbar-brand"><h1 class="text-success display-6">Minimart</h1></a>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars text-primary"></span>
                 </button>
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
-                        <a href="index.php" class="nav-item nav-link active">Trang chủ</a>
+                        <a href="index.php" class="nav-item nav-link">Trang chủ</a>
                         <a href="product.php" class="nav-item nav-link">Sản phẩm</a>
                         
                         <!-- <div class="nav-item dropdown">
@@ -71,31 +71,31 @@
                         <!-- <a href="contact.php" class="nav-item nav-link">Contact</a> -->
                     </div>
                     <div class="d-flex m-3 me-0">
-                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal">
-                            <i class="fas fa-search text-primary"></i>
+                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal" >
+                            <i class="fas fa-search "></i>
                         </button>
                         <a href="#" class="position-relative me-4 my-auto">
-                            <i class="fa fa-shopping-cart  fa-2x"></i>
+                            <i class="fa fa-shopping-cart  fa-2x text-success"></i>
                             <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">0</span>
                         </a>
                         <!-- Nếu đã đăng nhập -->
                         <?php if (isset($_SESSION["MAND"])): ?>                
                             <span class="button-wrapper">
                             <a href="logout.php" class="my-auto" style="margin-right: 20px;">
-                                <i class="fas fa-sign-out-alt fa-2x"></i>
+                                <i class="fas fa-sign-out-alt fa-2x text-success"></i>
                             </a>
                             </span>
                             <!-- Nếu chưa đang nhập -->
                         <?php else: ?>
                             <span class="button-wrapper">
                                 <a href="login.php" class="my-auto" style="margin-right: 20px;">
-                                    <i class="fas fa-user fa-2x"></i>
+                                    <i class="fas fa-user fa-2x text-success"></i>
                                 </a>
                             </span>
 
                             <span class="button-wrapper">
                                 <a href="register.php" class="my-auto">
-                                    <i class="fas fa-user-plus fa-2x"></i>
+                                    <i class="fas fa-user-plus fa-2x text-success"></i>
                                 </a>
                             </span>
                             <?php endif; ?>

@@ -3,7 +3,7 @@
 <!-- Poster Start -->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
-        <h1 class="mb-4">Fresh fruits shop</h1>
+        <h1 class="mb-4">Shop</h1>
         <div class="row g-4">
             <div class="col-lg-12">
                 <div class="row g-4">           
@@ -12,9 +12,9 @@
                             <label for="fruits">Sắp xếp theo:</label>
                             <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
                                 <option value="volvo">Nổi bật</option>
-                                <option value="saab">Popularity</option>
-                                <option value="opel">Organic</option>
-                                <option value="audi">Fantastic</option>
+                                <option value="saab">Giá giảm</option>
+                                <option value="opel">Giá tăng</option>
+                                <option value="audi">Phần trăm giảm</option>
                             </select>
                         </div>
                     </div>
@@ -33,8 +33,8 @@
                                             $TENLSP = $row['TENLSP'];
                                     ?>
                                     <li>
-                                        <div class="d-flex justify-content-between fruite-name">
-                                            <a href="#"><i class="fas fa-circle me-2"></i><?php echo $TENLSP; ?></a>
+                                        <div class="d-flex justify-content-between fruite-name ">
+                                        <a href="#"><i class="fas fa-circle me-2 text-success"></i><span class="text-success"><?php echo $TENLSP; ?></span></a>
                                         </div>
                                     </li>
                                     <?php
@@ -57,7 +57,7 @@
                                 <div class="position-relative">
                                     <img src="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
                                     <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
-                                        <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
+                                        <h3 class="text-secondary fw-bold">. <br> . <br> .</h3>
                                     </div>
                                 </div>
                             </div>
@@ -66,34 +66,42 @@
                     <div class="col-lg-10">
                         <div class="col-lg-12">
                         <div class="row g-4 justify-content-center">
-                            <?php
-                                $result = mysqli_query($conn, "SELECT * FROM sanpham");
-                                if (mysqli_num_rows($result) <> 0) {
-                                    while ($rows = mysqli_fetch_assoc($result)) {
-                                ?>
-                                <div class="col-md-6 col-lg-6 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="img/<?php echo $rows['ANH']; ?>" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <!-- <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;"><?php echo $rows['MALSP']; ?></div> -->
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h6><?php echo $rows['TENSP']; ?></h6>
-                                            <p><?php echo $rows['MOTA']; ?></p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0"><?php echo $rows['GIA']; ?></p>
-                                            </div>
-                                            <div class="mt-3">
-                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
-                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php
-                                    }
-                                }
-                                ?>
+                        <?php
+$result = mysqli_query($conn, "SELECT * FROM sanpham");
+if (mysqli_num_rows($result) <> 0) {
+    while ($rows = mysqli_fetch_assoc($result)) {
+        $gia = $rows['GIA'];
+        $sale = $rows['SALE'];
+?>
+
+<div class="col-md-6 col-lg-6 col-xl-3">
+    <div class="border border-success rounded position-relative fruite-item">
+        <div class="fruite-img">
+            <img src="img/<?php echo $rows['ANH']; ?>" class="img-fluid w-100 rounded-top" alt="">
+        </div>
+        <div class="p-4 rounded-bottom">
+            <h6><?php echo $rows['TENSP']; ?></h6>
+            <p><?php echo $rows['MOTA']; ?></p>
+            <div class="d-flex flex-lg-wrap">
+                <?php if ($sale > 0) { ?>
+                    <p class="text-danger fs-5 fw-bold mb-0"><?php echo $sale . ' đ'; ?></p>
+                    <del class="ms-2"><?php echo $gia . ' đ'; ?></del>
+                <?php } else { ?>
+                    <p class="text-dark fs-5 fw-bold mb-0"><?php echo $gia . ' đ'; ?></p>
+                <?php } ?>
+            </div>
+            <div class="mt-3">
+                <a href="#" class="btn border border-success rounded-pill px-3 text-success">
+                    <i class="fa fa-shopping-bag me-2 text-success"></i> Thêm vào giỏ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+    }
+}
+?>
                             <div class="col-12">
                                 <div class="pagination d-flex justify-content-center mt-5">
                                     <a href="#" class="rounded">&laquo;</a>

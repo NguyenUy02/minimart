@@ -73,3 +73,6 @@ if (isset($_POST["delete"])) {
 </div> 
 </body>
 
+<?php
+include 'footer_admin.php';
+?>
