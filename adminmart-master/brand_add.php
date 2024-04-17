@@ -31,18 +31,18 @@ function isBrandExists($conn, $tenTH) {
 $sql = "SELECT MATH from thuonghieu ORDER BY MATH DESC LIMIT 1";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
-$maTH = (int) substr($row['MATH'], 3);
+$maTH = $row['MATH'];
+$maTH = (int) substr($maTH, 2);
 $maTH = $maTH + 1;
-$maTH = "TH" . str_pad($maTH, 2, "0", STR_PAD_LEFT);
+$maTH = "TH" . str_pad($maTH, 3, "0", STR_PAD_LEFT);
 
-if (isset($_POST['tenTH']) && isset($_POST['quocGia'])) {
-    $tenTH = $_POST["tenTH"];
-    $quocGia = $_POST["quocGia"];
-
+if (isset($_POST['tenTH'])) $tenTH = $_POST["tenTH"]; else $tenTH = "";
+if (isset($_POST['quocGia'])) $quocGia = $_POST["quocGia"]; else $quocGia = "";
+if (isset($_POST["create"])) {
+    $tenTH = mysqli_real_escape_string($conn, $tenTH);
     if (!isBrandExists($conn, $tenTH)) {    
-        $sql = "INSERT INTO thuonghieu (MATH, TENTH, QUOCGIA) VALUES ('$maTH', '$tenTH', '$quocGia')";
+        $sql = "INSERT INTO thuonghieu (MATH, TENTH, QUOCGIA) VALUES ('$maTH','$tenTH', '$quocGia')";
         mysqli_query($conn, $sql);
-
         echo "
         <div class='alert alert-success alert-dismissible'>
             <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -63,6 +63,7 @@ if (isset($_POST['tenTH']) && isset($_POST['quocGia'])) {
             </div>';
     }
 }
+
 ?>
 
 <div class="container">
