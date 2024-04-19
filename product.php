@@ -66,41 +66,41 @@
                         <div class="col-lg-12">
                             <div class="row g-4 justify-content-center">
                             <?php
-                                $result = mysqli_query($conn, "SELECT * FROM sanpham");
-                                if (mysqli_num_rows($result) <> 0) {
-                                    while ($rows = mysqli_fetch_assoc($result)) {
-                                        $gia = $rows['GIA'];
-                                        $sale = $rows['SALE'];
-                                        ?>
-                                        <div class="col-md-6 col-lg-6 col-xl-3">
-                                            <div class="border border-success rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <a href="detail.php?id=<?php echo $rows['MASP']; ?>" class="img-wrap">
-                                                        <img src="img/<?php echo $rows['ANH']; ?>" class="img-fluid w-100 rounded-top" alt="">
-                                                    </a>
+                            $result = mysqli_query($conn, "SELECT * FROM sanpham");
+                            if (mysqli_num_rows($result) <> 0) {
+                                while ($rows = mysqli_fetch_assoc($result)) {
+                                    $gia = $rows['GIA'];
+                                    $sale = $rows['SALE'];
+                                    ?>
+                                    <div class="col-md-6 col-lg-6 col-xl-3">
+                                        <div class="border border-success rounded position-relative fruite-item">
+                                            <div class="fruite-img">
+                                                <a href="detail.php?id=<?php echo $rows['MASP']; ?>" class="img-wrap">
+                                                    <img src="img/<?php echo $rows['ANH']; ?>" class="img-fluid w-100 rounded-top" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="p-4 rounded-bottom">
+                                                <h6><?php echo $rows['TENSP']; ?></h6>
+                                                <p><?php echo $rows['MOTA']; ?></p>
+                                                <div class="d-flex flex-lg-wrap mb-3">
+                                                    <?php if ($sale > 0) { ?>
+                                                        <p class="text-danger fs-5 fw-bold mb-0"><?php echo $sale . ' đ'; ?></p>
+                                                        <del class="ms-2"><?php echo $gia . ' đ'; ?></del>
+                                                    <?php } else { ?>
+                                                        <p class="text-dark fs-5 fw-bold mb-0"><?php echo $gia . ' đ'; ?></p>
+                                                    <?php } ?>
                                                 </div>
-                                                <div class="p-4 rounded-bottom">
-                                                    <h6><?php echo $rows['TENSP']; ?></h6>
-                                                    <p><?php echo $rows['MOTA']; ?></p>
-                                                    <div class="d-flex flex-lg-wrap">
-                                                        <?php if ($sale > 0) { ?>
-                                                            <p class="text-danger fs-5 fw-bold mb-0"><?php echo $sale . ' đ'; ?></p>
-                                                            <del class="ms-2"><?php echo $gia . ' đ'; ?></del>
-                                                        <?php } else { ?>
-                                                            <p class="text-dark fs-5 fw-bold mb-0"><?php echo $gia . ' đ'; ?></p>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <a href="#" class="btn border border-success rounded-pill px-3 text-success" 
-                                                            onclick="addToCart('<?php echo $rows['MASP']; ?>');">
-                                                            <i class="fa fa-shopping-bag me-2 text-success"></i> Thêm vào giỏ hàng</a>
-                                                    </div>
+                                                <div class="text-center">
+                                                    <a href="#" class="btn border border-success rounded-pill px-4 text-success" 
+                                                        onclick="addToCart('<?php echo $rows['MASP']; ?>');">
+                                                        <i class="fa fa-shopping-bag me-2 text-success"></i> Thêm vào giỏ</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php
-                                    }
+                                    </div>
+                                    <?php
                                 }
+                            }
                             ?>                          
                             </div>
                         </div>

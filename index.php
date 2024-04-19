@@ -106,36 +106,36 @@
     <!-- Bestsaler Product End -->
     <!-- Vesitable Shop Start-->
     <div class="container-fluid vesitable py-5">
-    <div class="container py-5">
-    <h1 class="mb-0">Sản phẩm nổi bật</h1>
-    <div class="owl-carousel vegetable-carousel justify-content-center">
-        <?php
-        $result = mysqli_query($conn, "SELECT * FROM sanpham  LIMIT 12");
-        if (mysqli_num_rows($result) <> 0) {
-            while ($rows = mysqli_fetch_assoc($result)) {
-        ?>
-        <div class="border border-success rounded position-relative vesitable-item" style="height: 400px; width: 251px;">
-            <div class="vesitable-img">
-                <img src="img/<?php echo $rows['ANH']; ?>" class="img-fluid rounded-top" style="height: 200px; object-fit: cover;" alt="">
-            </div>
-            <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;"><?php echo $rows['MALSP']; ?></div> -->
-            <div class="p-4 rounded-bottom">
-                <h5><?php echo $rows['TENSP']; ?></h5>
-                <p style="height: 45px; overflow: hidden;"><?php echo $rows['MOTA']; ?></p>
-                <div class="d-flex justify-content-between flex-wrap">
-                    <p class="text-dark fw-bold mb-1"><?php echo $rows['GIA']; ?></p>
+        <div class="container py-5">
+            <h1 class="mb-0">Sản phẩm nổi bật</h1>
+            <div class="owl-carousel vegetable-carousel justify-content-center">
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM sanpham  LIMIT 12");
+                if (mysqli_num_rows($result) <> 0) {
+                    while ($rows = mysqli_fetch_assoc($result)) {
+                ?>
+                <div class="border border-success rounded position-relative vesitable-item" style="height: 400px; width: 251px;">
+                    <div class="vesitable-img">
+                        <img src="img/<?php echo $rows['ANH']; ?>" class="img-fluid rounded-top" style="height: 200px; object-fit: cover;" alt="">
+                    </div>
+                    <!-- <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;"><?php echo $rows['MALSP']; ?></div> -->
+                    <div class="p-4 rounded-bottom">
+                        <h5><?php echo $rows['TENSP']; ?></h5>
+                        <p style="height: 45px; overflow: hidden;"><?php echo $rows['MOTA']; ?></p>
+                        <div class="d-flex justify-content-between flex-wrap">
+                            <p class="text-dark fw-bold mb-1"><?php echo $rows['GIA']; ?></p>
+                        </div>
+                        <div class="text-center"> <!-- Thêm lớp text-center để căn giữa nút -->
+                            <a href="#" class="btn border border-secondary rounded-pill text-success"><i class="fa fa-shopping-bag me-2 text-success"></i> Thêm vào giỏ</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-center"> <!-- Thêm lớp text-center để căn giữa nút -->
-                    <a href="#" class="btn border border-secondary rounded-pill text-success"><i class="fa fa-shopping-bag me-2 text-success"></i> Thêm vào giỏ</a>
-                </div>
+                <?php
+                    }
+                }
+                ?>
             </div>
         </div>
-        <?php
-            }
-        }
-        ?>
-    </div>
-</div>
     </div>
     <!-- Vesitable Shop End -->
     <!-- Featurs Section Start -->

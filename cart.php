@@ -121,7 +121,10 @@ if(!isset($_SESSION['MAND']))
                         <h5 class="mb-0 ps-4 me-4">Thành tiền</h5>
                         <strong class="mb-0 pe-4" id="ThanhTien">0</strong>
                     </div>
-                    <a href="cart_check.php" id="btnThanhToan" class="btn border-secondary rounded-pill px-4 py-3 text-success text-uppercase mb-4 ms-4">Mua</a>
+                    <div class="text-end px-4 mb-4">
+                <a href="cart_check.php" id="btnThanhToan" 
+                    class="btn border-secondary rounded-pill px-4 py-3 text-success text-uppercase mb-4 ms-4">Đặt mua</a>
+            </div>
                 </div>
             </div>
         </div>

@@ -112,7 +112,7 @@ $_SESSION['tongtien'] = $tongtien;
                     </table>
                 </div>
                 <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                    <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-success">Thanh toán khi nhận hàng</button>
+                    <a href="oder_success.php" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-success">Thanh toán khi nhận hàng</a>
                 </div>
                 <div class="row g-4 text-center align-items-center justify-content-center pt-4">
                     <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-success">Thanh toán trước bằng VNPAY</button>

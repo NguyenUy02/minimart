@@ -13,6 +13,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -46,9 +48,9 @@ include("connect.php");
     </div>
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="index.php" class="navbar-brand"><h1 class="text-success display-6">Minimart</h1></a>
+            <a href="index.php" class="navbar-brand"><img src="img/logo.jpg" alt="Minimart Logo" class="img-fluid" style="max-height: 60px;"> </a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="fa fa-bars text-primary"></span>
+                <span class="fa fa-bars text-success"></span>
             </button>
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
