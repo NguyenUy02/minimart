@@ -51,8 +51,7 @@
                                     <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
                                 </div>
                             </div>
-                            
-                            
+
                             <div class="col-lg-12">
                                 <div class="position-relative">
                                     <img src="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
@@ -65,58 +64,45 @@
                     </div>
                     <div class="col-lg-10">
                         <div class="col-lg-12">
-                        <div class="row g-4 justify-content-center">
+                            <div class="row g-4 justify-content-center">
                             <?php
                                 $result = mysqli_query($conn, "SELECT * FROM sanpham");
                                 if (mysqli_num_rows($result) <> 0) {
                                     while ($rows = mysqli_fetch_assoc($result)) {
                                         $gia = $rows['GIA'];
                                         $sale = $rows['SALE'];
-                                ?>
-
-                                <div class="col-md-6 col-lg-6 col-xl-3">
-                                    <div class="border border-success rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <a href="detail.php?id=<?php echo $rows['MASP']; ?>" class="img-wrap">
-                                                <img src="img/<?php echo $rows['ANH']; ?>" class="img-fluid w-100 rounded-top" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="p-4 rounded-bottom">
-                                            <h6><?php echo $rows['TENSP']; ?></h6>
-                                            <p><?php echo $rows['MOTA']; ?></p>
-                                            <div class="d-flex flex-lg-wrap">
-                                                <?php if ($sale > 0) { ?>
-                                                    <p class="text-danger fs-5 fw-bold mb-0"><?php echo $sale . ' đ'; ?></p>
-                                                    <del class="ms-2"><?php echo $gia . ' đ'; ?></del>
-                                                <?php } else { ?>
-                                                    <p class="text-dark fs-5 fw-bold mb-0"><?php echo $gia . ' đ'; ?></p>
-                                                <?php } ?>
+                                        ?>
+                                        <div class="col-md-6 col-lg-6 col-xl-3">
+                                            <div class="border border-success rounded position-relative fruite-item">
+                                                <div class="fruite-img">
+                                                    <a href="detail.php?id=<?php echo $rows['MASP']; ?>" class="img-wrap">
+                                                        <img src="img/<?php echo $rows['ANH']; ?>" class="img-fluid w-100 rounded-top" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="p-4 rounded-bottom">
+                                                    <h6><?php echo $rows['TENSP']; ?></h6>
+                                                    <p><?php echo $rows['MOTA']; ?></p>
+                                                    <div class="d-flex flex-lg-wrap">
+                                                        <?php if ($sale > 0) { ?>
+                                                            <p class="text-danger fs-5 fw-bold mb-0"><?php echo $sale . ' đ'; ?></p>
+                                                            <del class="ms-2"><?php echo $gia . ' đ'; ?></del>
+                                                        <?php } else { ?>
+                                                            <p class="text-dark fs-5 fw-bold mb-0"><?php echo $gia . ' đ'; ?></p>
+                                                        <?php } ?>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <a href="#" class="btn border border-success rounded-pill px-3 text-success" 
+                                                            onclick="addToCart('<?php echo $rows['MASP']; ?>');">
+                                                            <i class="fa fa-shopping-bag me-2 text-success"></i> Thêm vào giỏ hàng</a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="mt-3">
-                                                <a href="#" class="btn border border-success rounded-pill px-3 text-success">
-                                                    <i class="fa fa-shopping-bag me-2 text-success"></i> Thêm vào giỏ</a>
-                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <?php
+                                        <?php
                                     }
                                 }
-                            ?>
-                            <div class="col-12">
-                                <div class="pagination d-flex justify-content-center mt-5">
-                                    <a href="#" class="rounded">&laquo;</a>
-                                    <a href="#" class="active rounded">1</a>
-                                    <a href="#" class="rounded">2</a>
-                                    <a href="#" class="rounded">3</a>
-                                    <a href="#" class="rounded">4</a>
-                                    <a href="#" class="rounded">5</a>
-                                    <a href="#" class="rounded">6</a>
-                                    <a href="#" class="rounded">&raquo;</a>
-                                </div>
+                            ?>                          
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -134,3 +120,35 @@
         object-fit: contain; 
     }
 </style>
+<script>
+    function addToCart(masp) {
+    var soluong = 1;
+    $.ajax({
+        url: 'cart_add.php', // URL của phương thức "ThemVaoGioHang" trong controller
+        type: 'POST',
+        data: { MASP: masp, SOLUONG: soluong }, // Truyền dữ liệu masp và soluong
+        success: function (response) {
+            var result = JSON.parse(response);
+            if (result.success) {
+                $("#CartCount").text(result.slgh);
+                showSuccessToast("Đã thêm sản phẩm vào giỏ hàng");
+            } else {
+                showErrorToast("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng");
+            }
+        },
+        error: function () {
+            showErrorToast("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng");
+        }
+    });
+}
+
+function showSuccessToast(message) {
+    // Code để hiển thị toast thông báo thành công
+    console.log(message);
+}
+
+function showErrorToast(message) {
+    // Code để hiển thị toast thông báo lỗi
+    console.log(message);
+}
+</script>

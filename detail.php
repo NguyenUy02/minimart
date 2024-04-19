@@ -161,7 +161,7 @@ $result = mysqli_query($conn, "SELECT * FROM sanpham
                 type: 'POST',
                 data: { MASP: masp, SOLUONG: soluong }, // Truyền dữ liệu masp và soluong
                 success: function (response) {
-                
+               
                     var result = JSON.parse(response); 
                 
                     if (result.success) {        

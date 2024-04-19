@@ -43,4 +43,3 @@ if ($slgh != 0) {
 
 $response['slgh'] = $_SESSION['SLGH'];
 echo json_encode($response, JSON_NUMERIC_CHECK);
-?>

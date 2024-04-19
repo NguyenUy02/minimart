@@ -12,6 +12,7 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -69,42 +70,44 @@ include("connect.php");
                     <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal" >
                         <i class="fas fa-search "></i>
                     </button>
-                    <a href="cart.php" class="position-relative me-4 my-auto">
-                        <i class="fa fa-shopping-cart  fa-2x text-success"></i>
-                        <?php
+                    <div class="d-flex justify-content-center align-items-center">
+                        <a href="cart.php" class="text-success d-flex flex-column align-items-center mx-3 position-relative">
+                            <i class="fa fa-shopping-cart fa-2x"></i>
+                            <span>Cart</span>
+                            <?php
                             if (isset($_SESSION["MAND"])) {
                                 $query = "SELECT COUNT(MASP) AS SoLuong FROM giohang WHERE MAND = '{$_SESSION['MAND']}'";
                                 $result = mysqli_query($conn, $query);
                                 $row = mysqli_fetch_assoc($result);
                                 $_SESSION['SLGH'] = $row['SoLuong'];
-                                $_SESSION['SLGH'] == "" ? 0 : $_SESSION['SLGH'];
-                                echo '<span id="CartCount" class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">' . $_SESSION['SLGH'] . '</span>';
-
+                                if ($_SESSION['SLGH'] > 0) {
+                                    echo '<span id="CartCount" class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">' . $_SESSION['SLGH'] . '</span>';
+                                }
                             }
                             ?>
-                
-                    </a>
-                    <!-- Nếu đã đăng nhập -->
-                    <?php if (isset($_SESSION["MAND"])): ?>                
-                        <span class="button-wrapper">
-                        <a href="logout.php" class="my-auto" style="margin-right: 20px;">
-                            <i class="fas fa-sign-out-alt fa-2x text-success"></i>
                         </a>
-                        </span>
-                        <!-- Nếu chưa đang nhập -->
-                    <?php else: ?>
-                        <span class="button-wrapper">
-                            <a href="login.php" class="my-auto" style="margin-right: 20px;">
-                                <i class="fas fa-user fa-2x text-success"></i>
+                        <!-- Nếu đã đăng nhập -->
+                        <?php if (isset($_SESSION["MAND"])): ?>
+                            <a href="user.php" class="text-success d-flex flex-column align-items-center mx-3">
+                                <i class="fas fa-user fa-2x"></i>
+                                <span>Cá nhân</span>
                             </a>
-                        </span>
-
-                        <span class="button-wrapper">
-                            <a href="register.php" class="my-auto">
-                                <i class="fas fa-user-plus fa-2x text-success"></i>
+                            <a href="logout.php" class="text-success d-flex flex-column align-items-center mx-3">
+                                <i class="fas fa-sign-out-alt fa-2x"></i>
+                                <span>Đăng xuất</span>
                             </a>
-                        </span>
+                        <?php else: ?>
+                            <!-- Nếu chưa đăng nhập -->
+                            <a href="login.php" class="text-success d-flex flex-column align-items-center mx-3">
+                                <i class="fas fa-sign-in-alt fa-2x"></i>
+                                <span>Đăng nhập</span>
+                            </a>
+                            <a href="register.php" class="text-success d-flex flex-column align-items-center mx-3">
+                                <i class="fas fa-user-plus fa-2x"></i>
+                                <span>Đăng ký</span>
+                            </a>
                         <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </nav>
