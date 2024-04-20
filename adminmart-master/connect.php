@@ -2,7 +2,7 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'thuctap2');
+define('DB_NAME', 'minimart2');
 $conn = mysqli_connect(DB_HOST , DB_USER, '', DB_NAME)
 or die('Could not connect to MySQL: ' . mysqli_connect_error());
 mysqli_set_charset($conn, 'UTF8');

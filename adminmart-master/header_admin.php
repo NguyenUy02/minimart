@@ -92,7 +92,7 @@
                                     class="hide-menu">Tài khoản
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="order.php"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="orders.php"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
                                     class="hide-menu">Hóa đơn
                                 </span></a>
