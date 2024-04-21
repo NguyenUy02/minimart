@@ -52,8 +52,8 @@ include 'db_connect.php';
                 echo '<td>' . $row['GIOITINH'] . '</td>';
                 echo '<td>' . $row['DIACHI'] . '</td>';
                 echo '<td>';
-                echo '<a href="./brand_edit.php?maSP=' . $row['MAND'] . '"><button class="btn btn-success btn-sm edit btn-flat"><i class="fa fa-edit"></i> Sửa</button></a>';
-                echo '<a href="./brand_delete.php?maSP=' . $row['MAND'] . '"><button class="btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Xoá</button></a>';
+                echo '<a href="./user_edit.php?maSP=' . $row['MAND'] . '"><button class="btn btn-success btn-sm edit btn-flat"><i class="fa fa-edit"></i> Sửa</button></a>';
+                echo '<a href="./user_delete.php?maSP=' . $row['MAND'] . '"><button class="btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Xoá</button></a>';
                 echo '</td>';
                 echo '</tr>';
             }

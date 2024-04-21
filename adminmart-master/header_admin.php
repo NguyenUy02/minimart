@@ -13,7 +13,11 @@
     <link href="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="dist/css/style.min.css" rel="stylesheet">   
 </head>
-
+<style>
+        body, a, span, li, p, h1, h2, h3, h4, h5, h6 {
+            color: #000000; /* Màu đen */
+        }
+    </style>
 <body>
     <div class="preloader">
         <div class="lds-ripple">
