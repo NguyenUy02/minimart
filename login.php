@@ -2,9 +2,9 @@
 <title>Đăng nhập</title>
 
     <!-- Poster Start -->
-    <div class="container-fluid py-5 mb-5 hero-header">
+<div class="container-fluid py-5 mb-5 hero-header">
     <div class="container py-5 d-flex justify-content-center align-items-center">
-        <div class="col-md-12 col-lg-7">
+        <div class="col-md-12 col-lg-4">
             <form action="login_Check.php" method="post">
                 <?php if (isset($_GET['error'])) { ?>
                     <div class="alert alert-danger">
@@ -21,14 +21,19 @@
                     <input type="password" name="MATKHAU" id="MATKHAU" class="form-control" placeholder="Mật khẩu">
                 </div>
                 <div class="mb-3 d-flex justify-content-center">
-                    <input type="submit" name="submit" class="btn btn-primary btn-block mt-2" value="Đăng nhập" />
+                    <input type="submit" name="submit" class="btn btn-success btn-block mt-2" value="Đăng nhập" />
                 </div>
             </form>
         </div>
     </div>
-    <p class="text-center mt-4" style="font-size:20px">Chưa có tài khoản? <a href="register.php">Đăng ký</a></p>
+    <p class="text-center  mt-4" style="font-size:20px">Chưa có tài khoản? <a href="register.php" class="text-success">Đăng ký</a></p>
 </div>
     
     <!-- Poster End -->
 
 <?php include 'footer.php' ?>
+<style>
+    form{
+        color: black;
+    }
+</style>

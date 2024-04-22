@@ -1,10 +1,11 @@
-<?php include 'header.php'; 
+<?php  
 include 'login_required.php'; 
 if(!isset($_SESSION['MAND']))
 {
     header("Location: login.php");  
     exit(); 
 }
+include 'header.php';
 ?>
 <title>Giỏ hàng</title>
  <!-- Cart Page Start -->

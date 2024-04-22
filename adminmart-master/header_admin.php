@@ -15,7 +15,8 @@
 </head>
 <style>
         body, a, span, li, p, h1, h2, h3, h4, h5, h6 {
-            color: #000000; /* Màu đen */
+            color: #000000;
+            font-family: Arial, sans-serif;
         }
     </style>
 <body>
@@ -66,7 +67,7 @@
                 </div>
             </nav>
         </header>
-        <aside class="left-sidebar" data-sidebarbg="skin6">
+        <aside class="left-sidebar" data-sidebarbg="skin6" style="border: 1px solid #000;">
             <div class="scroll-sidebar" data-sidebarbg="skin6">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">

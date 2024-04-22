@@ -48,30 +48,18 @@ include("connect.php");
     </div>
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="index.php" class="navbar-brand"><img src="img/logo.jpg" alt="Minimart Logo" class="img-fluid" style="max-height: 60px;"> </a>
+            <a href="index.php" class="navbar-brand"><img src="img/logo.jpg" alt="Minimart Logo" class="img-fluid" style="max-height: 60px; "> </a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars text-success"></span>
             </button>
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                <div class="navbar-nav mx-auto">
-                    <a href="index.php" class="nav-item text-dark nav-link">Trang chủ</a>
-                    <a href="product.php" class="nav-item text-dark nav-link">Sản phẩm</a>
-                    
-                    <!-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                            <a href="cart.php" class="dropdown-item">Cart</a>
-                            <a href="chackout.php" class="dropdown-item">Chackout</a>
-                            <a href="testimonial.php" class="dropdown-item">Testimonial</a>
-                            <a href="404.php" class="dropdown-item">404 Page</a>
-                        </div>
-                    </div> -->
-                    <!-- <a href="contact.php" class="nav-item nav-link">Contact</a> -->
+                <div class="navbar-nav mx-auto my-2">
+                    <a href="product.php" class="nav-item text-dark nav-link">Danh sách sản phẩm</a>                
                 </div>
-                <div class="d-flex m-3 me-0">
-                    <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal" >
-                        <i class="fas fa-search "></i>
-                    </button>
+                <div class="position-relative mx-1 my-3 d-flex justify-content-end">
+                    <input class="form-control border-2 border-secondary py-2 px-3 rounded-pill" type="number" placeholder="Tìm kiếm" style="width: 400px; margin-left: auto;">
+                    <button type="submit" class="btn btn-success border-2 border-secondary py-2 px-3 position-absolute rounded-pill text-white h-100" style="top: 0; right: 0%;">Tìm kiếm</button>
+                </div>
                     <div class="d-flex justify-content-center align-items-center">
                         <a href="cart.php" class="text-success d-flex flex-column align-items-center mx-3 position-relative">
                             <i class="fa fa-shopping-cart fa-2x"></i>

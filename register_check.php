@@ -21,7 +21,7 @@ if (isset($_POST['TENND']) && isset($_POST['SDT'])  && isset($_POST['MATKHAU'])
 
         // Tạo mã ND mới
         $maND = intval(substr($maMax, 2)) + 1;
-        $SP = str_pad($maND, 2, '0', STR_PAD_LEFT);
+        $SP = str_pad($maND, 3, '0', STR_PAD_LEFT);
         return 'ND' . $SP;
     }
 

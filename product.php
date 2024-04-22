@@ -91,8 +91,9 @@
                                                     <?php } ?>
                                                 </div>
                                                 <div class="text-center">
-                                                    <a href="#" class="btn border border-success rounded-pill px-4 text-success" 
-                                                        onclick="addToCart('<?php echo $rows['MASP']; ?>');">
+                                                    <a <?php if (!isset($_SESSION['MAND'])) { ?> 
+                                                        href="login.php" <?php } else { ?> href="javascript:void(0)"  
+                                                        onclick="addToCart('<?php echo $rows['MASP']; ?>');" <?php } ?> class="btn border border-success rounded-pill px-4 text-success">
                                                         <i class="fa fa-shopping-bag me-2 text-success"></i> Thêm vào giỏ</a>
                                                 </div>
                                             </div>
