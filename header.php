@@ -70,9 +70,9 @@ include("connect.php");
                                 $result = mysqli_query($conn, $query);
                                 $row = mysqli_fetch_assoc($result);
                                 $_SESSION['SLGH'] = $row['SoLuong'];
-                                if ($_SESSION['SLGH'] > 0) {
+                                $_SESSION['SLGH'] == "" ? 0 : $_SESSION['SLGH'];
                                     echo '<span id="CartCount" class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">' . $_SESSION['SLGH'] . '</span>';
-                                }
+                                
                             }
                             ?>
                         </a>
