@@ -21,7 +21,7 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung
                             <!-- <div class="row g-4"> -->
                             <div class="mb-3">
                                 <h2>Danh mục tùy chọn</h2>
-                                <a class="list-group-item active" href="#">Thông tin chung</a>
+                                <a class="list-group-item active" href="user.php">Thông tin chung</a>
                                 <a class="list-group-item" href="user_orders.php">Lịch sử đơn hàng</a>
                                 <a class="list-group-item" href="user_changeinfo.php">Chỉnh sửa thông tin cá nhân</a>
                             </div>                          
@@ -48,7 +48,7 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung
                                                 <form method="POST" enctype="multipart/form-data">
                                                     <input type="file" accept="image/*" class="d-none" name="avatar" id="avatar-input">
                                                     <label for="avatar-input" class="btn btn-light btn-sm edit-avatar">Chỉnh sửa</label>
-                                                    <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
+                                                    <button type="submit" class="btn btn-success btn-sm">Lưu</button>
                                                 </form>  
                                         </div>
                                     </div>

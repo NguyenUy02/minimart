@@ -19,10 +19,6 @@ if (isset($_POST["saveChanges"])) {
         $diachi_error = "diachi_error=Địa chỉ không được để trống";
         $error_check = true;
     }
-    if (empty($sdt)) {
-        $sdt_error = "sdt_error=Số điện thoại không được để trống";
-        $error_check = true;
-    }
     
     
     if ($error_check) {
@@ -32,7 +28,7 @@ if (isset($_POST["saveChanges"])) {
     }
     else {
         mysqli_query($conn, "UPDATE nguoidung 
-    SET TENND = '$tennd', DIACHI = '$diachi', SDT = '$sdt'
+    SET TENND = '$tennd', DIACHI = '$diachi'
     WHERE nguoidung.MAND = '{$_SESSION['MAND']}'");
     }
 }
