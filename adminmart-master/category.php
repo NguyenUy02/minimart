@@ -2,7 +2,6 @@
 include 'header_admin.php';
 include 'db_connect.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -18,10 +17,10 @@ include 'db_connect.php';
 </head>
 <body>
     <div class="page-wrapper">
-        <h1>Danh sách loại sản phẩm</h1>
         <div style="margin-bottom: 10px; margin-left: 20px ">
-        <a href="./category_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
-    </div>
+            <h1>Danh sách loại sản phẩm</h1>
+            <a href="./category_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
+        </div>
         <?php
         // Truy vấn cơ sở dữ liệu để lấy danh sách loại sản phẩm
         $query = "SELECT * FROM loaisanpham";
@@ -49,13 +48,11 @@ include 'db_connect.php';
                 echo '</td>';
                 echo '</tr>';
             }
-
             echo '</tbody>';
             echo '</table>';
         } else {
             echo 'Không có loại sản phẩm nào.';
         }
-
         // Đóng kết nối cơ sở dữ liệu
         mysqli_close($conn);
         ?>

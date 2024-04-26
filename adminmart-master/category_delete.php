@@ -27,18 +27,12 @@ include 'db_connect.php';
     if (isset($_POST['delete'])) {
         try {
             $sql = "DELETE FROM loaisanpham WHERE MALSP = '$maLSP'";
-            mysqli_query($conn, $sql);
-            
+            mysqli_query($conn, $sql);      
             echo "
-            <div class='alert alert-success alert-dismissible'>
-                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                <h4><i class='icon fa fa-check'></i> Thành công!</h4>
-                Xoá thành công
-            </div>
             <script>
                 setTimeout(function() {
                     window.location.href = 'category.php';
-                }, 2000); // Chuyển hướng sau 2 giây
+                }, 0); 
             </script>
             ";
         } catch (Exception $e) {

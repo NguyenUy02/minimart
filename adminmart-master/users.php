@@ -18,11 +18,10 @@ include 'db_connect.php';
 </head>
 <body>
     <div class="page-wrapper">
-        <h1>Danh sách người dùng</h1>
-
-        <div style="margin-bottom: 10px; margin-left: 50px ">
-        <a href="./user_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
-    </div>
+        <div style="margin-bottom: 10px; margin-left: 20px ">
+            <h1>Danh sách người dùng</h1>
+            <a href="./user_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
+        </div>
 
         <?php
         // Truy vấn cơ sở dữ liệu để lấy danh sách loại sản phẩm

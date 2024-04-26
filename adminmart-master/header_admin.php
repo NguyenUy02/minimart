@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['MAAD']))
+{
+    header("Location: ../../../../login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -102,6 +110,7 @@
                                     class="hide-menu">Hóa đơn
                                 </span></a>
                         </li>
+                        
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Thống kê</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
@@ -112,9 +121,11 @@
                         
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Đăng xuất</span></li>                   
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="logout_admin.php"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
-                                    class="hide-menu">Đăng xuất</span></a></li>
+                                    class="hide-menu">Đăng xuất
+                                </span></a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

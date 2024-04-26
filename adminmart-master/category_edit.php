@@ -53,15 +53,10 @@ include 'db_connect.php';
                 $result = mysqli_query($conn, $sql);
                 if ($result) {
                     echo "
-                    <div class='alert alert-success alert-dismissible'>
-                        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                        <h4><i class='icon fa fa-check'></i> Thành công!</h4>
-                        Sửa dữ liệu thành công
-                    </div>
                     <script>
                         setTimeout(function() {
                             window.location.href = 'category.php';
-                        }, 2000); // Chuyển hướng sau 2 giây
+                        }, 0); 
                     </script>
                     ";
                 } else {

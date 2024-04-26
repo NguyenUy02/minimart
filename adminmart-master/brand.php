@@ -18,11 +18,10 @@ include 'db_connect.php';
 </head>
 <body>
     <div class="page-wrapper">
-        <h1>Danh sách thương hiệu</h1>
         <div style="margin-bottom: 10px; margin-left: 20px ">
-        <a href="./brand_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
-    </div>
-
+            <h1>Danh sách thương hiệu</h1>
+            <a href="./brand_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
+        </div>
         <?php
         // Truy vấn cơ sở dữ liệu để lấy danh sách thương hiệu
         $query = "SELECT * FROM thuonghieu";

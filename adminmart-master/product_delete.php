@@ -12,7 +12,6 @@ include 'db_connect.php';
 </head>
 <body>
 <div class="page-wrapper">
-     <h1>Xóa sản phẩm</h1>
 <?php
 $maSP = $_GET['maSP'];
 $sql = "SELECT TENSP, GIA, SOLUONG, MOTA, ANH, TENLSP, TENTH, thongtinsanpham.MATTSP
@@ -29,15 +28,10 @@ if (isset($_POST["xoa"])) {
         $sql = "DELETE FROM thongtinsanpham WHERE MATTSP = '{$row['MATTSP']}'";
         $result = mysqli_query($conn, $sql);
         echo "
-        <div class='alert alert-success alert-dismissible'>
-            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-            <h4><i class='icon fa fa-check'></i> Thành công!</h4>
-            Xoá thành công
-        </div>
         <script>
             setTimeout(function() {
                 window.location.href = 'product.php';
-            }, 2000); // Chuyển hướng sau 2 giây
+            }, 0);
         </script>
         ";
     }

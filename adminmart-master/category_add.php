@@ -47,7 +47,7 @@ include 'db_connect.php';
         </div>
         <script>
             setTimeout(function() {
-                window.location.href = 'Index.php';
+                window.location.href = 'category.php';
             }, 2000); // Chuyển hướng sau 2 giây
         </script>
         ";

@@ -5,23 +5,7 @@ require 'db_connect.php';
 <title>AdminMiniMart</title>
 <body>
     <div class="page-wrapper">
-        <div class="page-breadcrumb">
-            <div class="row">
-                <div class="col-7 align-self-center">
-                    <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Welcome</h3>
-                </div>
-                <div class="col-5 align-self-center">
-                    <div class="customize-input float-right">
-                        <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                            <option selected>Aug 19</option>
-                            <option value="1">July 19</option>
-                            <option value="2">Jun 19</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+ 
         <div class="container-fluid">
             <div class="card-group">
                 <div class="card border-right">
@@ -102,12 +86,9 @@ require 'db_connect.php';
                     </div>
                 </div>
             </div>
-        
         </div>
     </div>
-      
-</body>
 
 <?php
-include 'footer_admin.php'
+include 'footer_admin.php';
 ?>
