@@ -34,10 +34,10 @@ $maSP = (int) substr($row['MASP'], 2);
 $maSP = $maSP + 1;
 $maSP = "SP" . str_pad($maSP, 3, "0", STR_PAD_LEFT);
 
-$sql = "SELECT MATTSP from thongtinsanpham ORDER BY MATSKT DESC LIMIT 1";
+$sql = "SELECT MATTSP from thongtinsanpham ORDER BY MATTSP DESC LIMIT 1";
 $result1 = mysqli_query($conn, $sql);
 $row1 = mysqli_fetch_assoc($result);
-$maTTSP = (int) substr($row['MASP'], 4);
+$maTTSP = (int) substr($row['MASP'], 2);
 $maTTSP = $maTTSP + 1;
 $maTTSP = "TT" . str_pad($maTTSP, 3, "0", STR_PAD_LEFT);
 

@@ -13,7 +13,7 @@ require 'db_connect.php';
                         <div class="d-flex d-lg-flex d-md-block align-items-center">    
                         <div>
                         <?php 
-                            $sql_countKH = "SELECT COUNT(*) FROM nguoidung";
+                            $sql_countKH = "SELECT COUNT(*)-1 FROM nguoidung";
                             $kq = mysqli_query($conn, $sql_countKH);
                             $kq = mysqli_fetch_row($kq);
                         ?>    

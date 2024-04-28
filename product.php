@@ -81,7 +81,7 @@
                                             </div>
                                             <div class="p-4 rounded-bottom">
                                                 <h6><?php echo $rows['TENSP']; ?></h6>
-                                                <p><?php echo $rows['MOTA']; ?></p>
+                                                <!-- <p><?php echo $rows['MOTA']; ?></p> -->
                                                 <div class="d-flex flex-lg-wrap mb-3">
                                                     <?php if ($sale > 0) { ?>
                                                         <p class="text-danger fs-5 fw-bold mb-0"><?php echo $sale . ' đ'; ?></p>

@@ -81,10 +81,10 @@ if(!isset($_SESSION['MAAD']))
                     <ul id="sidebarnav">
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index.php"
                                 aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
-                                    class="hide-menu">Trang chủ</span></a></li>
-                        <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">Quản lý</span></li>
+                                    class="hide-menu">Trang chủ</span></a>
+                        </li>
 
+                        <li class="nav-small-cap"><span class="hide-menu">Quản lý</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link" href="product.php"
                                 aria-expanded="false"><i data-feather="package" class="feather-icon"></i><span
                                     class="hide-menu">Sản phẩm
@@ -110,16 +110,19 @@ if(!isset($_SESSION['MAAD']))
                                     class="hide-menu">Hóa đơn
                                 </span></a>
                         </li>
-                        
-                        <li class="list-divider"></li>
+
                         <li class="nav-small-cap"><span class="hide-menu">Thống kê</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="statictis.php"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">Thống kê
+                                    class="hide-menu">Thống kê doanh thu
+                                </span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="statictis_product.php"
+                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                                    class="hide-menu">Sản phẩm bán được
                                 </span></a>
                         </li>
                         
-                        <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Đăng xuất</span></li>                   
                         <li class="sidebar-item"> <a class="sidebar-link" href="logout_admin.php"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
