@@ -1,9 +1,31 @@
-<?php include 'header.php'; ?>
+<?php include 'header.php'; 
+$id = "";
+if (isset($_GET["id"])) {
+    $id = trim(preg_replace('/\s+/', ' ', $_GET["id"]));
+}
+if (isset($_GET["order"])) {
+    $order = $_GET["order"];
+} 
+if(isset($_GET['querry'])) {
+    $querry = $_GET['querry'];
+} 
+else {
+    $querry = "SELECT * FROM sanpham 
+               JOIN thuonghieu ON sanpham.MATH = thuonghieu.MATH
+               JOIN thongtinsanpham ON sanpham.MATTSP = thongtinsanpham.MATTSP
+               JOIN loaisanpham ON sanpham.MALSP = loaisanpham.MALSP
+               WHERE LOWER(TENSP) LIKE '%" . strtolower($id) . "%'
+                  OR sanpham.MALSP = '$id'
+                  OR LOWER(thuonghieu.TENTH) LIKE '%" . strtolower($id) . "%'";
+}
+$listSanPham = mysqli_query($conn, $querry . " ORDER BY IF(SALE > 0, SALE, GIA) $order");
+
+?>
 <title>Sản phẩm</title>
 <!-- Poster Start -->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
-        <h1 class="mb-4 text-white">Shop</h1>
+       <h1 class="mb-4 text-white">Shop</h1>
         <div class="row g-4">
             <div class="col-lg-12">
                 <div class="row g-4">           
@@ -68,7 +90,7 @@
                             <?php
                             $result = mysqli_query($conn, "SELECT * FROM sanpham");
                             if (mysqli_num_rows($result) <> 0) {
-                                while ($rows = mysqli_fetch_assoc($result)) {
+                                while ($rows = mysqli_fetch_assoc($listSanPham)) {
                                     $gia = $rows['GIA'];
                                     $sale = $rows['SALE'];
                                     ?>

@@ -70,7 +70,7 @@ if (isset($_POST['TENND']) && isset($_POST['SDT'])  && isset($_POST['MATKHAU'])
             exit();
         } else {
             $sql3 = "INSERT INTO nguoidung(MAND, TENND, SDT, MATKHAU,  GIOITINH,  DIACHI, ISADMIN) 
-            VALUES('$mand', '$tennd', '$sdt', '$matkhau',  '$gioitinh',  '$diachi', b'0')";
+            VALUES('$mand', '$tennd', '$sdt', '$matkhau',  '$gioitinh',  '$diachi', '0')";
             $result3 = mysqli_query($conn, $sql3);
 
             if ($result3) {

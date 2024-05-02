@@ -57,8 +57,11 @@ include("connect.php");
                     <a href="product.php" class="nav-item text-dark nav-link">Danh sách sản phẩm</a>                
                 </div>
                 <div class="position-relative mx-1 my-3 d-flex justify-content-end">
-                    <input class="form-control border-2 border-secondary py-2 px-3 rounded-pill" type="number" placeholder="Tìm kiếm" style="width: 400px; margin-left: auto;">
-                    <button type="submit" class="btn btn-success border-2 border-secondary py-2 px-3 position-absolute rounded-pill text-white h-100" style="top: 0; right: 0%;">Tìm kiếm</button>
+                    <form action="product.php"  method="get">
+                        <input class="form-control border-2 border-secondary py-2 px-3 rounded-pill" type="text" placeholder="Tìm kiếm sản phẩm" style="width: 400px; margin-left: auto;" name="id">
+                        <button type="submit" class="btn btn-success border-2 border-secondary py-2 px-3 position-absolute rounded-pill text-white h-100" 
+                        style="top: 0; right: 0%;"> Tìm kiếm</button>
+                    </form>
                 </div>
                     <div class="d-flex justify-content-center align-items-center">
                         <a href="cart.php" class="text-success d-flex flex-column align-items-center mx-3 position-relative">
