@@ -110,7 +110,7 @@ if (isset($_POST['tinhtoan'])) {
     $sql_tt = "SELECT sanpham.TENSP, chitiethoadon.SOLUONGMUA AS TONGSOLUONG, chitiethoadon.SOLUONGMUA * chitiethoadon.DONGIAXUAT AS TONGBANDUOC, loaisanpham.TENLSP AS TLSP
         FROM ((hoadon JOIN chitiethoadon ON hoadon.MAHD = chitiethoadon.MAHD)
         JOIN sanpham ON chitiethoadon.MASP = sanpham.MASP)
-        JOIN loaisanpham ON sanpham.MALOAISP = loaisanpham.MALOAISP
+        JOIN loaisanpham ON sanpham.MALSP = loaisanpham.MALSP
         WHERE (sanpham.MALSP = '" . $_POST["loaisp"] . "') 
         AND (hoadon.NGAYTAO <= '" . $_POST['ngayKetThuc'] . "') 
         AND (hoadon.NGAYTAO >= '" . $_POST['ngayBatDau'] . "') 

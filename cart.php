@@ -25,7 +25,8 @@ include 'header.php';
             <table class="table" style="color: black;">
                 <thead>
                     <tr>
-                    <th scope="col" width="60"> </th>
+                    <th scope="col" width="60" class="text-center align-middle">
+                        <input type="checkbox" class="col-9 select-all pt-4" style="height: 20px" onchange="toggleSelectAll(this)"> </th>
                     <th scope="col" width="150">Sản phẩm</th>
                     <th scope="col">Tên</th>
                     <th scope="col" width="150">Giá</th>
@@ -52,17 +53,17 @@ include 'header.php';
                     <td>
                         <p class="mb-0 mt-4">
                         <?php if ($row['SALE'] > 0) { ?>
-                                    <var class="price pt-2 sale-price"
-                                        id="giaSP_<?php echo $row['MASP']?>">  <?php echo $row['sale']; ?></var>
-                                <?php } else { ?>
-                                    <var class="price pt-2"
-                                        id="giaSP_<?php echo $row['MASP']?>">  <?php echo $row['DGSP']; ?></var>
-                                <?php } ?>
+                            <var class="price pt-2 sale-price"
+                                id="giaSP_<?php echo $row['MASP']?>">  <?php echo $row['sale']; ?></var>
+                        <?php } else { ?>
+                            <var class="price pt-2"
+                                id="giaSP_<?php echo $row['MASP']?>">  <?php echo $row['DGSP']; ?></var>
+                        <?php } ?>
                         </p>
                     </td>
                     <!-- Nút tăng giảm số lượng -->
                     <td>
-                        <div class="input-group quantity mt-4" style="width: 100px;">
+                        <div class="input-group mt-4" style="width: 100px;">
                             <div class="input-group-btn">
                                 <button onclick="decreaseQuantity('<?php echo $row['MASP']?>')" class="btn btn-sm btn-minus rounded-circle bg-light border" type="button">
                                 <i class="fa fa-minus"></i>
@@ -80,15 +81,15 @@ include 'header.php';
                     <!-- Thành tiền -->
                     <td>
                         <p class="mb-0 mt-4">
-                        <?php if ($row['SALE'] > 0) { ?>
-                                    <span class="price pt-2 item-total">
-                                        <?php echo $row['SALE'] * $row['SLGH']; ?>
-                                    </span>
-                                <?php } else { ?>
-                                    <span  class="price pt-2 item-total">
-                                        <?php echo $row['DGSP'] * $row['SLGH']; ?>
-                                    </span>
-                                <?php } ?>
+                            <?php if ($row['SALE'] > 0) { ?>
+                                <var id="subtotal_<?php echo $row['MASP']?>" class="price pt-2 item-total">
+                                    <?php echo $row['SALE'] * $row['SLGH']; ?>
+                                </var>
+                            <?php } else { ?>
+                                <var id="subtotal_<?php echo $row['MASP']?>" class="price pt-2 item-total">
+                                    <?php echo $row['DGSP'] * $row['SLGH']; ?>
+                                </var>
+                            <?php } ?>
                         </p>
                     </td>
                     <!-- Nút xóa -->
@@ -166,7 +167,13 @@ include 'header.php';
             });
         });
     });
-
+    function toggleSelectAll(checkbox) {
+        var checkboxes = document.querySelectorAll('.sanpham-checkbox');
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = checkbox.checked;
+            calculateTotalPrice();
+        }
+    }
     function calculateSelectedCount() {
         var checkboxes = document.querySelectorAll('.sanpham-checkbox');
         var countElement = document.querySelector('.countslsp');
@@ -225,6 +232,33 @@ include 'header.php';
             }
         });
     });
+    //Nút bấm giảm 1 số lượng
+    function decreaseQuantity(productId) {
+       
+       var inputElement = document.getElementById('soluong_' + productId);
+       var quantity = parseInt(inputElement.value);
+       if (quantity > 1) {
+           quantity -= 1;
+           inputElement.value = quantity;
+           updateCart(productId, quantity);
+           calculateSubtotalPrice(productId);
+           calculateTotalPrice();
+       }
+   }
+   //Nút bấm tăng 1 số lượng
+   function increaseQuantity(productId) {
+    var inputElement = document.getElementById('soluong_' + productId);
+    var quantity = parseInt(inputElement.value);
+    var maxQuantity = parseInt(inputElement.getAttribute('max'));
+    
+    if (quantity < maxQuantity) {
+        quantity += 1;
+        inputElement.value = quantity;
+        updateCart(productId, quantity);
+        calculateSubtotalPrice(productId);
+        calculateTotalPrice();
+    }
+}
 
     // Tính thành tiền cho từng sản phẩm
     function calculateSubtotalPrice(idsp) {

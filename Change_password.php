@@ -15,9 +15,9 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung  WHERE nguoidung.MAND = '
                             <!-- <div class="row g-4"> -->
                             <div class="mb-3">
                                 <h2>Danh mục tùy chọn</h2>
-                                <a class="list-group-item active" href="user">Thông tin chung</a>
+                                <a class="list-group-item" href="user">Thông tin chung</a>
                                 <a class="list-group-item" href="user_orders.php">Lịch sử đơn hàng</a>
-                                <a class="list-group-item" href="user_changeinfo.php">Chỉnh sửa thông tin cá nhân</a>
+                                <a class="list-group-item  active" href="user_changeinfo.php">Chỉnh sửa thông tin cá nhân</a>
                             </div>                          
                                                         
                             <!-- </div> -->
@@ -25,7 +25,7 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung  WHERE nguoidung.MAND = '
                         <div class="col-lg-9"><H2>Đổi mật khẩu</H2>   
                             <!-- <div class="col-lg-12"> -->                         
                             <div class="card-body">                         
-                                <form method="post" action="Changepass_Check.php" class="row">
+                                <form method="post" action="Changepass_Check.php" class="row text-dark">
                                     <div class="col-md-9">
                                         <div class="form-row">
                                             <div class="col form-group col-md-9 my-3">
@@ -60,9 +60,9 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung  WHERE nguoidung.MAND = '
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Lưu" name="saveChanges" class="btn btn-primary mr-2"
+                                                <input type="submit" value="Lưu" name="saveChanges" class="btn btn-success mt-2 mr-2"
                                                     id="save_info" />
-                                                <a href="user_changeinfo.php" class="btn btn-light">Quay lại</a>
+                                                <a href="user_changeinfo.php" class="btn btn-light mt-2">Quay lại</a>
                                             </div>
                                         </div>
                                     </div>

@@ -6,6 +6,7 @@ require_once("vendor/autoload.php"); // Đường dẫn đến autoload.php củ
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 ?>
+<title>Thống kê doanh thu</title>
 <body>
     <div class="page-wrapper">  
         <h1 style="text-align: center">Thống kê doanh thu</h1>
@@ -115,7 +116,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
             $sheet->setCellValueExplicit('C' . $row, $data['TENSP'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             $sheet->setCellValueExplicit('D' . $row, $data['SOLUONGMUA'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
             $sheet->setCellValueExplicit('E' . $row, $data['DONGIAXUAT'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
-            $sheet->setCellValueExplicit('F' . $row, $data['DONGIAXUAT'] * $data['SOLUONG'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
+            $sheet->setCellValueExplicit('F' . $row, $data['DONGIAXUAT'] * $data['SOLUONGMUA'], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
             $row++;
         }
         $totalCell = 'G2'; // Chọn ô G ở dòng tiếp theo

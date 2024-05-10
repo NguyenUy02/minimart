@@ -3,13 +3,16 @@ $id = "";
 if (isset($_GET["id"])) {
     $id = trim(preg_replace('/\s+/', ' ', $_GET["id"]));
 }
+
+$order = ""; // Khởi tạo biến $order
+
 if (isset($_GET["order"])) {
     $order = $_GET["order"];
-} 
-if(isset($_GET['querry'])) {
+}
+
+if (isset($_GET['querry'])) {
     $querry = $_GET['querry'];
-} 
-else {
+} else {
     $querry = "SELECT * FROM sanpham 
                JOIN thuonghieu ON sanpham.MATH = thuonghieu.MATH
                JOIN thongtinsanpham ON sanpham.MATTSP = thongtinsanpham.MATTSP
@@ -18,25 +21,62 @@ else {
                   OR sanpham.MALSP = '$id'
                   OR LOWER(thuonghieu.TENTH) LIKE '%" . strtolower($id) . "%'";
 }
-$listSanPham = mysqli_query($conn, $querry . " ORDER BY IF(SALE > 0, SALE, GIA) $order");
+
+// Thêm phần ORDER BY vào câu truy vấn SQL dựa trên giá trị của $order
+switch ($order) {
+    case 'priceDesc':
+        $querry .= " ORDER BY sanpham.GIA DESC";
+        break;
+    case 'priceAsc':
+        $querry .= " ORDER BY sanpham.GIA ASC";
+        break;
+    case 'discountDesc':
+        $querry .= " ORDER BY (sanpham.GIA / sanpham.SALE)*100 DESC";
+        break;
+    case 'featured':
+    default:
+        // Không cần thêm ORDER BY, mặc định sẽ lấy dữ liệu theo truy vấn ban đầu
+        break;
+}
+if (isset($_GET["filter"])) {  
+    $loaisanpham = $_GET["loaisanpham"];
+    $giamin = intval($_GET["giamin"]);
+    $giamax = intval($_GET["giamax"]);
+    
+    // Lọc theo loại sản phẩm
+    $query = "SELECT * 
+    FROM sanpham  
+    JOIN loaisanpham ON sanpham.MALSP = loaisanpham.MALSP 
+    WHERE 1=1";
+   
+    if (!empty($loaisanpham)) {
+        $query .= " AND loaisanpham.TENLSP IN ('" . implode("', '", $loaisanpham) . "')";
+    }
+
+    if (!empty($giamin) && !empty($giamax)) {
+        $query .= " AND IF(sanpham.SALE > 0, sanpham.SALE, sanpham.GIA) BETWEEN $giamin AND $giamax";
+    }
+}
+$listSanPham = mysqli_query($conn, $querry);
+
 
 ?>
 <title>Sản phẩm</title>
 <!-- Poster Start -->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
-       <h1 class="mb-4 text-white">Shop</h1>
+       <h1 class="text-white">Shop</h1>
         <div class="row g-4">
             <div class="col-lg-12">
                 <div class="row g-4">           
                     <div class="col-xl-3">
-                        <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+                        <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4 mt-4">
                             <label for="fruits">Sắp xếp theo:</label>
-                            <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-                                <option value="volvo">Nổi bật</option>
-                                <option value="saab">Giá giảm</option>
-                                <option value="opel">Giá tăng</option>
-                                <option value="audi">Phần trăm giảm</option>
+                            <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform" onchange="sortProducts(this.value)">
+                                <option value="featured" <?php if ($order == 'featured') echo 'selected'; ?>>Nổi bật</option>
+                                <option value="priceDesc" <?php if ($order == 'priceDesc') echo 'selected'; ?>>Giá giảm</option>
+                                <option value="priceAsc" <?php if ($order == 'priceAsc') echo 'selected'; ?>>Giá tăng</option>
+                                <option value="discountDesc" <?php if ($order == 'discountDesc') echo 'selected'; ?>>Phần trăm giảm</option>
                             </select>
                         </div>
                     </div>
@@ -52,11 +92,15 @@ $listSanPham = mysqli_query($conn, $querry . " ORDER BY IF(SALE > 0, SALE, GIA) 
                                     $result = mysqli_query($conn, "SELECT * FROM loaisanpham");
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_assoc($result)) {
+                                            $MALSP = $row['MALSP'];
                                             $TENLSP = $row['TENLSP'];
                                     ?>
                                     <li>
                                         <div class="d-flex justify-content-between fruite-name ">
-                                        <a href="#"><i class="fas fa-circle me-2 text-success"></i><span class="text-success"><?php echo $TENLSP; ?></span></a>
+                                            <a href="product.php?id=<?php echo $MALSP; ?>">
+                                                <i class="fas fa-circle me-2 text-success"></i>
+                                                <span class="text-success"><?php echo $TENLSP; ?></span>
+                                            </a>
                                         </div>
                                     </li>
                                     <?php
@@ -69,11 +113,20 @@ $listSanPham = mysqli_query($conn, $querry . " ORDER BY IF(SALE > 0, SALE, GIA) 
                             <div class="col-lg-12">
                                 <div class="mb-3">
                                     <h4 class="mb-2">Giá</h4>
-                                    <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="500" value="0" oninput="amount.value=rangeInput.value">
-                                    <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
+                                    <div class="form-group col-md-12">
+                                    <label>Min</label>
+                                    <input class="form-control" placeholder="Min" type="number" name="giaMin">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Max</label>
+                                    <input class="form-control" placeholder="Max" type="number" name="giaMax">
+                                </div>
                                 </div>
                             </div>
-
+                            
+                            <div class="col-lg-12">
+                                <button id="btnApplyFilter" class="btn btn-block btn-primary">Áp dụng</button>
+                            </div>
                             <div class="col-lg-12">
                                 <div class="position-relative">
                                     <img src="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
@@ -101,6 +154,13 @@ $listSanPham = mysqli_query($conn, $querry . " ORDER BY IF(SALE > 0, SALE, GIA) 
                                                     <img src="img/<?php echo $rows['ANH']; ?>" class="img-fluid w-100 rounded-top" alt="">
                                                 </a>
                                             </div>
+                                            <?php
+                                            $phanTramGiamGia = round((($rows['GIA'] - $rows['SALE']) / $rows['GIA']) * 100);
+                                            if ($phanTramGiamGia > 0 && $rows['SALE'] > 0) {
+                                                echo '<div class="text-white bg-danger px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">' . $phanTramGiamGia . '%</div>';
+                                            }
+                                            ?>
+                                            
                                             <div class="p-4 rounded-bottom">
                                                 <h6><?php echo $rows['TENSP']; ?></h6>
                                                 <!-- <p><?php echo $rows['MOTA']; ?></p> -->
@@ -133,6 +193,15 @@ $listSanPham = mysqli_query($conn, $querry . " ORDER BY IF(SALE > 0, SALE, GIA) 
         </div>
     </div>
 </div>
+<form method="get" action="product.php" id="duLieuBoLoc" style="display: none">
+            <!-- Đặt input elements cho loaisanpham, hedieuhanh, thuonghieu, ram, rom, giamin, và giamax ở đây -->
+            <input type="hidden" name="loaisanpham" value="" />
+            
+            <input type="hidden" name="giamin" value="" />
+            <input type="hidden" name="giamax" value="" />
+            <!-- Nút gửi form -->
+            <button name="filter" type="submit">Gửi</button>
+        </form>
 <!-- Poster End -->
 
 <?php include 'footer.php' ?>
@@ -144,6 +213,26 @@ $listSanPham = mysqli_query($conn, $querry . " ORDER BY IF(SALE > 0, SALE, GIA) 
     }
 </style>
 <script>
+   $(document).ready(function () {
+    $('#btnApplyFilter').click(function (e) {
+        e.preventDefault();
+        
+        var LSP = [];
+        $('input[name=loaiSanPham]:checked').each(function () {
+            LSP.push($(this).parent().text().trim());
+        });
+        
+        var Gmin = $("input[name='giaMin']").val();
+        var Gmax = $("input[name='giaMax']").val();
+        if (Gmax == 0) Gmax = 999999999;
+
+        $("input[name='loaisanpham']").val(LSP);
+        $("input[name='giamin']").val(Gmin);
+        $("input[name='giamax']").val(Gmax);
+
+        $('#duLieuBoLoc').submit();
+    });
+});
     function addToCart(masp) {
     var soluong = 1;
     $.ajax({
@@ -174,4 +263,10 @@ function showErrorToast(message) {
     // Code để hiển thị toast thông báo lỗi
     console.log(message);
 }
+function sortProducts(order) {
+        var urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('order', order);
+        var newUrl = window.location.pathname + '?' + urlParams.toString();
+        window.location.href = newUrl;
+    }
 </script>

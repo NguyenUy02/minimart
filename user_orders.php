@@ -14,8 +14,8 @@ include 'header.php';
                             <!-- <div class="row g-4"> -->
                             <div class="mb-3">
                                 <h2>Danh mục tùy chọn</h2>
-                                <a class="list-group-item active" href="user.php">Thông tin chung</a>
-                                <a class="list-group-item" href="user_orders.php">Lịch sử đơn hàng</a>
+                                <a class="list-group-item" href="user.php">Thông tin chung</a>
+                                <a class="list-group-item  active" href="user_orders.php">Lịch sử đơn hàng</a>
                                 <a class="list-group-item" href="user_changeinfo.php">Chỉnh sửa thông tin cá nhân</a>
                             </div>                          
                             <div class="position-relative">
@@ -48,7 +48,7 @@ include 'header.php';
                         ?>
                         <article class="card mb-4">
                             <header class="card-header">
-                                <a href="#" class="float-right"> <i class="fa fa-print"></i></a>
+                                <a href="#" class="float-right"> <i class="fa fa-print text-dark"></i></a>
                                 <strong class="d-inline-block mr-3">ID đơn đặt hàng:
                                     <?php echo $row['MAHD'] ?>
                                 </strong>
@@ -107,7 +107,7 @@ include 'header.php';
                                                     </td>
                                                     <td>
                                                         <a href="detail.php?id=<?php echo $row['MASP']?>">
-                                                        <p class="title mb-0"><?php echo $row["TENSP"]?> </p>
+                                                        <p class="title mb-0 text-dark"><?php echo $row["TENSP"]?> </p>
                                                         <?php if ($row['SALE'] > 0) { ?>
                                                             <var class="price h6" ><?php echo $row['DONGIAXUAT']; ?></var>
                                                             <span class="h6 original-price"><del style="color: gray;"><?php echo $row['GIA']; ?></del></span>

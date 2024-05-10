@@ -10,65 +10,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
       $input = '';
   }
 
-  $sql = "SELECT
-              h.MAHD,
-              nd.TENND,
-              SUM(c.DONGIAXUAT * c.SOLUONGMUA) AS 'TONGCONG',
-              h.NGAYTAO,
-              h.TINHTRANGDONHANG,
-              c.SOLUONGMUA as SOLUONGMUA,
-              nd.SDT,
-              nd.DIACHI
-          FROM
-              hoadon h
-          JOIN
-              nguoidung nd ON h.MAND = nd.MAND
-          JOIN
-              chitiethoadon c ON h.MAHD = c.MAHD
-          WHERE
-              h.MAHD LIKE '%$input%' 
+  $sql = "SELECT h.MAHD, nd.TENND, SUM(c.DONGIAXUAT * c.SOLUONGMUA) AS 'TONGCONG',
+              h.NGAYTAO, h.TINHTRANGDONHANG, c.SOLUONGMUA as SOLUONGMUA, nd.SDT, nd.DIACHI
+          FROM hoadon h JOIN nguoidung nd ON h.MAND = nd.MAND
+          JOIN chitiethoadon c ON h.MAHD = c.MAHD
+          WHERE h.MAHD LIKE '%$input%' 
               OR nd.TENND LIKE '%$input%'               
               OR h.TINHTRANGDONHANG LIKE '%$input%'
               OR h.NGAYTAO LIKE '%$input%'
-          GROUP BY
-              h.MAHD, nd.TENND, nd.SDT, nd.DIACHI, h.NGAYTAO, h.TINHTRANGDONHANG
-          ORDER BY
-              h.NGAYTAO DESC";
+          GROUP BY h.MAHD, nd.TENND, nd.SDT, nd.DIACHI, h.NGAYTAO, h.TINHTRANGDONHANG
+          ORDER BY h.NGAYTAO DESC";
 } else {
   $input = '';
-  $sql = "SELECT
-              h.MAHD,
-              nd.TENND,
-              SUM(c.DONGIAXUAT * c.SOLUONGMUA) AS 'TONGCONG',
+  $sql = "SELECT h.MAHD, nd.TENND, SUM(c.DONGIAXUAT * c.SOLUONGMUA) AS 'TONGCONG',
               h.NGAYTAO,
               h.TINHTRANGDONHANG,
               c.SOLUONGMUA as SOLUONGMUA,
               nd.SDT,
               nd.DIACHI
-          FROM
-              hoadon h
-          JOIN
-              nguoidung nd ON h.MAND = nd.MAND
-          JOIN
-              chitiethoadon c ON h.MAHD = c.MAHD
-          GROUP BY
-              h.MAHD, nd.TENND, nd.SDT, nd.DIACHI, h.NGAYTAO, h.TINHTRANGDONHANG
-          ORDER BY
-              h.NGAYTAO DESC";
+          FROM hoadon h JOIN nguoidung nd ON h.MAND = nd.MAND
+          JOIN chitiethoadon c ON h.MAHD = c.MAHD
+          GROUP BY h.MAHD, nd.TENND, nd.SDT, nd.DIACHI, h.NGAYTAO, h.TINHTRANGDONHANG
+          ORDER BY h.NGAYTAO DESC";
 }
-
-
 
 $result = $conn->query($sql);
 $list = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
-
 <title>Danh sách hóa đơn</title>
 <body>
     <div class="page-wrapper">   
-        <div style="margin-bottom: 10px; margin-left: 20px ">
-            <h1>Hóa đơn</h1>
-        </div>       
+    <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
+    <h1 class="ml-4">Hóa đơn</h1>
+    <div class="d-flex">
+        <form action="" method="get" class="d-flex mr-4">
+            <input type="text" name="input" value="<?php echo isset($_GET['input']) ? $_GET['input'] : ''; ?>" 
+                placeholder="Tìm kiếm" class="form-control me-2">
+            <button type="submit" name="search" class="btn btn-primary">Tìm</button>
+        </form>
+    </div>
+</div>   
         <table class="table" style="color: black;">
         <tr align="center">
             <th>Mã hóa đơn</th>
@@ -84,11 +65,27 @@ $list = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <?php foreach ($list as $row) { ?>
             <tr align="center">
                 <td><?php echo $row["MAHD"]; ?></td>
-                <td><?php echo date('d \t\h\á\n\g m \n\ă\m Y', strtotime($row["NGAYTAO"])); ?></td>
+                <td><?php echo date('d/m/Y H:i:s', strtotime($row["NGAYTAO"])); ?></td>
                 <td><?php echo $row["TENND"]; ?></td>
                 <td><?php echo $row["SDT"]; ?></td>
                 <td><?php echo $row["DIACHI"]; ?></td>
-                <td><?php echo $row["TINHTRANGDONHANG"]; ?></td>
+                <td style="color:
+                    <?php
+                        if ($row["TINHTRANGDONHANG"] === "Đang xử lý") {
+                            echo 'red'; // Đang xử lý: màu đỏ
+                        } elseif ($row["TINHTRANGDONHANG"] === "Giao hàng thành công") {
+                            echo 'green'; // Giao hàng thành công: màu xanh lá
+                        } elseif ($row["TINHTRANGDONHANG"] === "Đang giao hàng") {
+                            echo 'black'; // Đang giao hàng: màu đen
+                        } elseif ($row["TINHTRANGDONHANG"] === "Giao hàng thất bại") {
+                            echo 'orange'; // Giao hàng thất bại: màu cam
+                        } else {
+                            echo 'transparent'; // Màu mặc định nếu không khớp với bất kỳ tình trạng nào khác
+                        }
+                    ?>;
+                ">
+                    <?php echo $row["TINHTRANGDONHANG"]; ?>
+                </td>
                 <td><?php echo number_format($row["TONGCONG"], 0, ',', '.'); ?> VND</td>
                 <td>
                     <button type="button" class="btn btn-primary chitiethoadon" 
@@ -148,6 +145,7 @@ include 'footer_admin.php';
         </div>
       </div>
       <div class="modal-footer">
+      <button type="button" class="btn btn-success" name="inHoadon" onclick="inHoaDon('<?php echo $row["MAHD"]; ?>')">In hóa đơn</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
       </div>
     </div>
@@ -183,7 +181,9 @@ include 'footer_admin.php';
     </div>
   </div>
 </div>
+
 <script>
+
 $(function(){
   $(document).on('click', '.chitiethoadon', function(e){
     e.preventDefault();
@@ -209,6 +209,7 @@ $(function(){
       $('.prepend_items').remove();
   });
 });
+
 
 $(function(){
   $(document).on('click', '.capnhathoadon', function(e){
@@ -266,5 +267,20 @@ $(function(){
   });
 });
 
-
+function inHoaDon(maHoaDon) {
+    $.ajax({
+        type: "POST",
+        url: "Print_order.php",
+        data: {
+            maHoaDon: maHoaDon
+        },
+        success: function(response) {
+            alert(response);
+        },
+        error: function() {
+            alert("Có lỗi xảy ra khi in hóa đơn.");
+        }
+    });
+}
 </script>
+

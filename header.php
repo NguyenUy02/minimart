@@ -36,7 +36,7 @@ include("connect.php");
     <div class="container topbar bg-success d-none d-lg-block">
         <div class="d-flex justify-content-between">
             <div class="top-info ps-2">
-                <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">Nha Trang, khánh hòa</a></small>
+                <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">Nha Trang, Khánh Hòa</a></small>
                 <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">uy.n.62cntt@ntu.edu.vn</a></small>
             </div>
             <div class="top-link pe-2">
@@ -66,7 +66,7 @@ include("connect.php");
                     <div class="d-flex justify-content-center align-items-center">
                         <a href="cart.php" class="text-success d-flex flex-column align-items-center mx-3 position-relative">
                             <i class="fa fa-shopping-cart fa-2x"></i>
-                            <span>Cart</span>
+                            <span>Giỏ hàng</span>
                             <?php
                             if (isset($_SESSION["MAND"])) {
                                 $query = "SELECT COUNT(MASP) AS SoLuong FROM giohang WHERE MAND = '{$_SESSION['MAND']}'";

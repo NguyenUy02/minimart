@@ -44,16 +44,16 @@ $_SESSION['tongtien'] = $tongtien;
             <div class="col-md-12 col-lg-4">
                 <h4 class="mb-4 text-center">Thông tin người nhận</h4>
                 <div class="form-item">
-                    <label class="form-label my-3">Tên người người nhận<sup>*</sup></label>
-                    <input type="tel" class="form-control">
+                    <label class="form-label my-3">Tên người người nhận:</label>
+                    <p><?php echo $_SESSION["TENND"] . '<br>';?></p>
                 </div>
                 <div class="form-item">
-                    <label class="form-label my-3">Địa chỉ người nhận <sup>*</sup></label>
-                    <input type="text" class="form-control" placeholder="House Number Street Name">
+                    <label class="form-label my-3">Địa chỉ người nhận:</label>
+                    <p><?php echo $_SESSION["DIACHI"] . '<br>';?></p>
                 </div>
                 <div class="form-item">
-                    <label class="form-label my-3">Số điện thoại người nhận<sup>*</sup></label>
-                    <input type="tel" class="form-control">
+                    <label class="form-label my-3">Số điện thoại người nhận:</label>
+                    <p><?php echo  $_SESSION["SDT"] . '<br>';?></p>
                 </div>
             </div>
             <div class="col-md-12 col-lg-6 col-xl-7">
@@ -81,14 +81,14 @@ $_SESSION['tongtien'] = $tongtien;
                                 <td class="py-5"><?php if ($row['SALE'] > 0): ?> 
                                     <var class="price"><?php echo $row['SALE'] ?></var>
                                     <?php else: ?>
-                                        <var class="price"><?php echo $row['DONGIA'] ?></var>
+                                        <var class="price"><?php echo $row['GIA'] ?></var>
                                     <?php endif; ?>
                                 </td>
-                                <td class="py-5"><?php echo $row['slgh'] ?></td>
+                                <td class="py-5 text-center"><?php echo $row['slgh'] ?></td>
                                 <td class="py-5"><?php if ($row['SALE'] > 0): ?>
                                         <?php echo $row['slgh'] * $row['SALE'] ?>
                                     <?php else: ?>
-                                        <?php echo $row['slgh'] * $row['DONGIA'] ?>
+                                        <?php echo $row['slgh'] * $row['GIA'] ?>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -115,7 +115,7 @@ $_SESSION['tongtien'] = $tongtien;
                     <a href="oder_success.php" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-success">Thanh toán khi nhận hàng</a>
                 </div>
                 <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                    <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-success">Thanh toán trước bằng VNPAY</button>
+                <a href="vnpay_php/index_vnpay.php" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-success">Thanh toán trước bằng VNPAY</a>
                 </div>
             </div>
             </div>

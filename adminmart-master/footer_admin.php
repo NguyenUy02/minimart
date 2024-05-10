@@ -1,5 +1,4 @@
 <footer class="footer text-center text-muted">
-                Adminmart be Designed and Developed by 
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -11,6 +11,7 @@ $result = mysqli_query($conn, "SELECT * FROM sanpham
     WHERE MASP = '$id'
     LIMIT 1");
 ?>
+<title>Chi tiết sản phẩm</title>
     <!-- Single Product Start -->
 <div class="container-fluid py-5 mt-5" style="color: black;">
 <div class="container py-5">
@@ -25,10 +26,18 @@ $result = mysqli_query($conn, "SELECT * FROM sanpham
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <h4 class="fw-bold mb-3"><?php echo $row['TENSP']; ?></h4>
-                    <p class="mb-3">Danh mục: <?php echo $row['TENLSP']; ?></p>
-                    <h5 class="fw-bold mb-3"><?php echo $row['GIA']; ?> đ</h5>                           
-                    <p class="mb-4"><?php echo $row['MOTA']; ?></p>     
+                    <h4 class="fw-bold mb-3"><?php echo $row['TENSP']; ?></h4>                  
+                    <?php if ($row['SALE'] > 0) { ?>
+                        <p class="text-danger fw-bold mb-3">Giá bán: <?php echo $row['SALE']; ?> đ</p>
+                    <?php } else { ?>
+                        <p class="fw-bold mb-3">Giá bán: <?php echo $row['GIA']; ?> đ</p>
+                    <?php } ?>
+                    <?php if ($row['SOLUONG'] > 0) { ?>
+                        <p class="mb-3 text-success">Còn hàng</p>
+                    <?php } else { ?>
+                        <p class="mb-3 text-danger">Tạm hết hàng</p>
+                    <?php } ?>
+                    <p class="mb-3">Thương hiệu: <?php echo $row['TENTH']; ?></p>
                     <div class="input-group quantity mb-5" style="width: 100px;">
                         <div class="input-group-btn">
                             <button class="btn btn-sm btn-minus rounded-circle bg-light border">
@@ -81,7 +90,7 @@ $result = mysqli_query($conn, "SELECT * FROM sanpham
                                                 <p class="mb-0">Khối lượng</p>
                                             </div>
                                             <div class="col-8">
-                                                <p class="mb-0"><?php echo $row['KHOILUONG']; ?></p>
+                                                <p class="mb-0"><?php echo $row['KHOILUONG']; ?>g</p>
                                             </div>
                                         </div>
                                         <?php } else { ?>
@@ -90,7 +99,7 @@ $result = mysqli_query($conn, "SELECT * FROM sanpham
                                                 <p class="mb-0">Thể tích</p>
                                             </div>
                                             <div class="col-8">
-                                                <p class="mb-0"><?php echo $row['THETICH']; ?></p>
+                                                <p class="mb-0"><?php echo $row['THETICH']; ?>ml</p>
                                             </div>
                                         </div>
                                         <?php } ?>
@@ -105,7 +114,7 @@ $result = mysqli_query($conn, "SELECT * FROM sanpham
         <div class="col-lg-4 col-xl-3">
             <div class="row g-4 fruite">
                 <div class="col-lg-12">
-                    <h4 class="mb-4">Sản phẩm cùng loại</h4>                       
+                    <h4 class="mb-4">Sản phẩm liên quan</h4>                       
                     <?php                       
                     $result1 = mysqli_query($conn, "SELECT * FROM sanpham ORDER BY RAND() LIMIT 2");                                            
                     while ($row1 = mysqli_fetch_assoc($result1)) { ?>
@@ -114,10 +123,14 @@ $result = mysqli_query($conn, "SELECT * FROM sanpham
                             <img src="img/<?php echo $row1['ANH']; ?>" class="img-fluid rounded" alt="Image">
                         </div>
                         <div>
-                            <h6 class="mb-2"> <?php echo $row1['TENSP']; ?></h6>
+                            <h6 class="mb-2">&nbsp;<?php echo $row1['TENSP']; ?></h6>
                             <div class="d-flex mb-2">
-                                <h5 class="fw-bold me-2"><?php echo $row1['GIA']; ?> đ</h5>
-                                <h5 class="text-danger text-decoration-line-through"><?php echo $row1['SALE']; ?> đ</h5>
+                                <?php if ($row1['SALE'] > 0) { ?>
+                                    <h5 class="fw-bold me-2 text-danger">&nbsp;<?php echo $row1['SALE']; ?> đ</h5>
+                                    <h5 class="text-muted text-decoration-line-through"><?php echo $row1['GIA']; ?> đ</h5>
+                                <?php } else { ?>
+                                    <h5 class="fw-bold me-2 text-dark">&nbsp;<?php echo $row1['GIA']; ?> đ</h5>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -126,9 +139,6 @@ $result = mysqli_query($conn, "SELECT * FROM sanpham
                 <div class="col-lg-12">
                     <div class="position-relative">
                         <img src="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
-                        <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
-                            <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -174,7 +184,7 @@ $result = mysqli_query($conn, "SELECT * FROM sanpham
                 },
                 error: function () {
                     
-                    alert("Có lỗi xảy ra khi thêm vào giỏ hàng!");
+                    alert("Hãy đăng nhập trước khi thêm vào giỏ hàng!");
                 }
             });
 
