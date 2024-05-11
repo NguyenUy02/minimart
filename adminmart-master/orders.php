@@ -40,7 +40,7 @@ $list = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <title>Danh sách hóa đơn</title>
 <body>
     <div class="page-wrapper">   
-    <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
+    <div class="d-flex justify-content-between align-items-center ">
     <h1 class="ml-4">Hóa đơn</h1>
     <div class="d-flex">
         <form action="" method="get" class="d-flex mr-4">
@@ -88,15 +88,20 @@ $list = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </td>
                 <td><?php echo number_format($row["TONGCONG"], 0, ',', '.'); ?> VND</td>
                 <td>
-                    <button type="button" class="btn btn-primary chitiethoadon" 
+                    <button type="button" class="btn btn-success mb-1 inhoadon" 
+                            data-id="<?php echo $row["MAHD"]; ?>"
+                            data-toggle="modal" data-target="#inhoadonModal">
+                            <i class='fa fa-print'></i> In
+                    </button>
+                    <button type="button" class="btn btn-primary mb-1 chitiethoadon" 
                             data-id="<?php echo $row["MAHD"]; ?>"
                             data-toggle="modal" data-target="#chitiethoadonModal">
-                        <i class='fa fa-search'></i> Xem
+                        <i class='fa fa-search'></i> Xem 
                     </button>
-                    <button type="button" class="btn btn-success capnhathoadon" 
+                    <button type="button" class="btn btn-secondary capnhathoadon" 
                             data-id="<?php echo $row["MAHD"]; ?>"
                             data-toggle="modal" data-target="#capnhathoadonModal">
-                        <i class="fa fa-refresh"></i></i>Cập nhật
+                        <i class="fa fa-refresh"></i></i>Cập nhật hóa đơn
                     </button>
                 </td>
             </tr>
@@ -145,7 +150,7 @@ include 'footer_admin.php';
         </div>
       </div>
       <div class="modal-footer">
-      <button type="button" class="btn btn-success" name="inHoadon" onclick="inHoaDon('<?php echo $row["MAHD"]; ?>')">In hóa đơn</button>
+      
         <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
       </div>
     </div>
@@ -266,21 +271,30 @@ $(function(){
     $('#update_tinhtrang').html('');
   });
 });
+$(function(){
+  $(document).on('click', '.inhoadon', function(e){
+    e.preventDefault();
 
-function inHoaDon(maHoaDon) {
+    $('#inhoadon').modal('show');
+    var id = $(this).data('id');
+    
     $.ajax({
-        type: "POST",
-        url: "Print_order.php",
-        data: {
-            maHoaDon: maHoaDon
-        },
-        success: function(response) {
-            alert(response);
-        },
-        error: function() {
-            alert("Có lỗi xảy ra khi in hóa đơn.");
-        }
+      type: 'POST',
+      url: 'Print_order.php',
+      data: {id:id},
+      dataType: 'json',
+      success:function(response){
+        $('#ngaytao').html(response.ngaytao);
+        $('#maHD').html(response.maHD);
+        $('#detail').html(response.list);
+        $('#total').html(response.total);
+      }
     });
-}
+  });
+
+  $("#chitiethoadon").on("hidden.bs.modal", function () {
+      $('.prepend_items').remove();
+  });
+});
 </script>
 

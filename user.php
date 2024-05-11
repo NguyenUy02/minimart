@@ -34,12 +34,28 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung
                             <!-- </div> -->
                         </div>
                         <div class="col-lg-9"><H2>Thông tin tài khoản</H2>   
-                            <!-- <div class="col-lg-12"> -->                         
+                        <?php
+                            // Kiểm tra xem người dùng đã chọn ảnh đại diện mới hay chưa
+                            if (isset($_FILES['avatar'])) {
+                                $file = $_FILES['avatar'];
+                                $uploadDir = 'adminmart-master/assets/images/users/'; // Đường dẫn tới thư mục lưu trữ ảnh đại diện
+
+                                // Kiểm tra và di chuyển tệp tin tải lên vào thư mục lưu trữ
+                                if ($file['error'] === UPLOAD_ERR_OK) {
+                                    $fileName = 'avatar.jpg'; // Tên tệp tin cố định
+                                    $filePath = $uploadDir . $fileName;
+                                    move_uploaded_file($file['tmp_name'], $filePath);
+
+                                    // Lưu đường dẫn ảnh đã chọn vào tệp tin
+                                    file_put_contents('adminmart-master/assets/images/users/file.txt', $filePath);
+                                }
+                            }
+                            ?>                         
                             <div class="card-body">                         
                                 <figure class="icontext">
                                     <div class="d-flex align-items-center">
                                         <div class="icon">
-                                            <img class="rounded-circle img-sm border avatar-img" src="<?php echo $row['ANHDAIDIEN'] ? $row['ANHDAIDIEN'] : 'adminmart-master/assets/images/users/1.jpg'; ?>" data-id="<?php echo $row['MAND']; ?>">
+                                            <img class="rounded-circle img-sm border avatar-img" src="<?php echo $row['ANHDAIDIEN'] ? $row['ANHDAIDIEN'] : 'img/avatar.jpg'; ?>" data-id="<?php echo $row['MAND']; ?>">
                                         </div>
                                         <div class="text d-flex flex-column flex-grow-1 ms-3">
                                             
@@ -52,6 +68,42 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung
                                                 </form>  
                                         </div>
                                     </div>
+                                    <script>
+    $(document).ready(function() {
+        var avatarImg = $('.icontext .avatar-img');
+        var avatarInput = $('#avatar-input');
+        var MAND = '<?php echo $row['MAND']; ?>';
+
+        // Kiểm tra nếu đã có ảnh được chọn từ trước
+        if (localStorage.getItem('selectedAvatar_' + MAND)) {
+            avatarImg.attr('src', localStorage.getItem('selectedAvatar_' + MAND));
+        }
+
+        avatarInput.change(function() {
+            var input = this;
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var newAvatarUrl = e.target.result;
+                    avatarImg.attr('src', newAvatarUrl);
+                    localStorage.setItem('selectedAvatar_' + MAND, newAvatarUrl);
+
+                    // Gửi đường dẫn ảnh đã chọn lên máy chủ để lưu vào tệp tin
+                    $.ajax({
+                        url: 'user_avatar.php', // Đường dẫn đến file PHP xử lý việc lưu ảnh
+                        type: 'POST',
+                        data: { avatarUrl: newAvatarUrl },
+                        success: function(response) {
+                            // Xử lý kết quả sau khi lưu ảnh thành công
+                        }
+                    });
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    });
+</script>
                                 </figure>                           
                                 <hr>  <!-- gạch ngang -->
                                 <p>
@@ -138,39 +190,3 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung
     height: 75px;
 }
 </style>
-<script>
-    $(document).ready(function() {
-        var avatarImg = $('.icontext .avatar-img');
-        var avatarInput = $('#avatar-input');
-        var MAND = '<?php echo $row['MAND']; ?>';
-
-        // Kiểm tra nếu đã có ảnh được chọn từ trước
-        if (localStorage.getItem('selectedAvatar_' + MAND)) {
-            avatarImg.attr('src', localStorage.getItem('selectedAvatar_' + MAND));
-        }
-
-        avatarInput.change(function() {
-            var input = this;
-
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var newAvatarUrl = e.target.result;
-                    avatarImg.attr('src', newAvatarUrl);
-                    localStorage.setItem('selectedAvatar_' + MAND, newAvatarUrl);
-
-                    // Gửi đường dẫn ảnh đã chọn lên máy chủ để lưu vào tệp tin
-                    $.ajax({
-                        url: 'avatar.php', // Đường dẫn đến file PHP xử lý việc lưu ảnh
-                        type: 'POST',
-                        data: { avatarUrl: newAvatarUrl },
-                        success: function(response) {
-                            // Xử lý kết quả sau khi lưu ảnh thành công
-                        }
-                    });
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        });
-    });
-</script>

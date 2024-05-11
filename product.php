@@ -39,22 +39,21 @@ switch ($order) {
         break;
 }
 if (isset($_GET["filter"])) {  
-    $loaisanpham = $_GET["loaisanpham"];
-    $giamin = intval($_GET["giamin"]);
-    $giamax = intval($_GET["giamax"]);
+    $loaisanpham = !empty($_GET["loaisanpham"]) ? explode(",", $_GET["loaisanpham"]) : [];
+    $giamin = !empty($_GET["giamin"]) ? floatval($_GET["giamin"]) : 0;
+    $giamax = !empty($_GET["giamax"]) ? floatval($_GET["giamax"]) : PHP_FLOAT_MAX;
     
-    // Lọc theo loại sản phẩm
     $query = "SELECT * 
     FROM sanpham  
     JOIN loaisanpham ON sanpham.MALSP = loaisanpham.MALSP 
     WHERE 1=1";
    
     if (!empty($loaisanpham)) {
-        $query .= " AND loaisanpham.TENLSP IN ('" . implode("', '", $loaisanpham) . "')";
+        $query .= " AND loaisanpham.MALSP IN ('" . implode("', '", $loaisanpham) . "')";
     }
 
-    if (!empty($giamin) && !empty($giamax)) {
-        $query .= " AND IF(sanpham.SALE > 0, sanpham.SALE, sanpham.GIA) BETWEEN $giamin AND $giamax";
+    if ($giamin > 0 && $giamax > 0) {
+        $query .= " AND sanpham.GIA BETWEEN $giamin AND $giamax";
     }
 }
 $listSanPham = mysqli_query($conn, $querry);
@@ -114,27 +113,20 @@ $listSanPham = mysqli_query($conn, $querry);
                                 <div class="mb-3">
                                     <h4 class="mb-2">Giá</h4>
                                     <div class="form-group col-md-12">
-                                    <label>Min</label>
-                                    <input class="form-control" placeholder="Min" type="number" name="giaMin">
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label>Max</label>
-                                    <input class="form-control" placeholder="Max" type="number" name="giaMax">
-                                </div>
+                                        <label>Giá từ</label>
+                                        <input class="form-control" placeholder="Min" type="number" name="giamin">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label>Đến</label>
+                                        <input class="form-control" placeholder="Max" type="number" name="giamax">
+                                    </div>
                                 </div>
                             </div>
                             
                             <div class="col-lg-12">
                                 <button id="btnApplyFilter" class="btn btn-block btn-primary">Áp dụng</button>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="position-relative">
-                                    <img src="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
-                                    <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
-                                        <h3 class="text-secondary fw-bold">. <br> . <br> .</h3>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-10">
@@ -219,18 +211,21 @@ $listSanPham = mysqli_query($conn, $querry);
         
         var LSP = [];
         $('input[name=loaiSanPham]:checked').each(function () {
-            LSP.push($(this).parent().text().trim());
+            LSP.push($(this).val());
         });
         
         var Gmin = $("input[name='giaMin']").val();
         var Gmax = $("input[name='giaMax']").val();
-        if (Gmax == 0) Gmax = 999999999;
-
-        $("input[name='loaisanpham']").val(LSP);
+        
+        if (Gmax === '') {
+            Gmax = 999999;
+        }
+        
+        $("input[name='loaisanpham']").val(LSP.join(','));
         $("input[name='giamin']").val(Gmin);
         $("input[name='giamax']").val(Gmax);
 
-        $('#duLieuBoLoc').submit();
+        $('button[name="filter"]').click();
     });
 });
     function addToCart(masp) {

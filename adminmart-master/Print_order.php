@@ -6,13 +6,8 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $maHoaDon = isset($_POST['maHoaDon']) ? $_POST['maHoaDon'] : null;
-    if ($maHoaDon !== null) {
-        // Tiếp tục xử lý với $maHoaDon
-    } else {
-        echo "Không có mã hóa đơn được truyền vào.";
-        exit;
-    }
+    $id = isset($_POST['id']) ? $_POST['id'] : null;
+   
 
     // Tạo và xuất file Excel
     $spreadsheet = new Spreadsheet();
@@ -31,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
            chitiethoadon.DONGIAXUAT 
            FROM (hoadon JOIN chitiethoadon ON hoadon.MAHD = chitiethoadon.MAHD)
            JOIN sanpham ON chitiethoadon.MASP = sanpham.MASP
-           WHERE hoadon.MAHD = '$maHoaDon'";
+           WHERE hoadon.MAHD = '$id'";
     $result = mysqli_query($conn, $sql);
 
     // Dòng bắt đầu để ghi dữ liệu vào file Excel
@@ -54,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Đặt tên file Excel và lưu nó vào desktop
     $desktopPath = 'D:\\';
-    $filename = $desktopPath . 'hoa_don_' . $maHoaDon . '_' . date('YmdHis') . '.xlsx';
+    $filename = $desktopPath . 'hoa_don_' . $id . '_' . date('YmdHis') . '.xlsx';
     $writer = new Xlsx($spreadsheet);
     $writer->save($filename);
 
