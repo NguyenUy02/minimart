@@ -115,7 +115,7 @@ $_SESSION['tongtien'] = $tongtien;
                     <a href="oder_success.php" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-success">Thanh toán khi nhận hàng</a>
                 </div>
                 <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                <a href="vnpay_php/index_vnpay.php" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-success">Thanh toán trước bằng VNPAY</a>
+                <a href="vnpay_php/index.php" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-success">Thanh toán trước bằng VNPAY</a>
                 </div>
             </div>
             </div>

@@ -53,6 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $writer = new Xlsx($spreadsheet);
     $writer->save($filename);
 
-    echo "In hóa đơn thành công! Đã lưu tại: " . $filename;
+    
 }
-?>
+

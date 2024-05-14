@@ -150,7 +150,6 @@ include 'footer_admin.php';
         </div>
       </div>
       <div class="modal-footer">
-      
         <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
       </div>
     </div>
@@ -289,6 +288,7 @@ $(function(){
         $('#detail').html(response.list);
         $('#total').html(response.total);
       }
+      
     });
   });
 

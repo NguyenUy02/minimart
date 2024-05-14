@@ -3,7 +3,7 @@
 
     <!-- Poster Start -->
 <div class="container-fluid py-5 mb-5 hero-header">
-    <div class="container py-5 d-flex justify-content-center align-items-center">
+    <div class="container pt-5 d-flex justify-content-center align-items-center">
         <div class="col-md-12 col-lg-4">
             <form action="login_Check.php" method="post">
                 <?php if (isset($_GET['error'])) { ?>
@@ -24,9 +24,10 @@
                     <input type="submit" name="submit" class="btn btn-success btn-block mt-2" value="Đăng nhập" />
                 </div>
             </form>
+            <p class="text-center  mt-4" style="font-size:20px"><a href="forgot_password.php" class="text-danger">Quên mật khẩu</a></p>
         </div>
     </div>
-    <p class="text-center  mt-4" style="font-size:20px">Chưa có tài khoản? <a href="register.php" class="text-success">Đăng ký</a></p>
+    <p class="text-center" style="font-size:20px">Chưa có tài khoản? <a href="register.php" class="text-success">Đăng ký</a></p>
 </div>
     
     <!-- Poster End -->

@@ -38,24 +38,7 @@ switch ($order) {
         // Không cần thêm ORDER BY, mặc định sẽ lấy dữ liệu theo truy vấn ban đầu
         break;
 }
-if (isset($_GET["filter"])) {  
-    $loaisanpham = !empty($_GET["loaisanpham"]) ? explode(",", $_GET["loaisanpham"]) : [];
-    $giamin = !empty($_GET["giamin"]) ? floatval($_GET["giamin"]) : 0;
-    $giamax = !empty($_GET["giamax"]) ? floatval($_GET["giamax"]) : PHP_FLOAT_MAX;
-    
-    $query = "SELECT * 
-    FROM sanpham  
-    JOIN loaisanpham ON sanpham.MALSP = loaisanpham.MALSP 
-    WHERE 1=1";
-   
-    if (!empty($loaisanpham)) {
-        $query .= " AND loaisanpham.MALSP IN ('" . implode("', '", $loaisanpham) . "')";
-    }
 
-    if ($giamin > 0 && $giamax > 0) {
-        $query .= " AND sanpham.GIA BETWEEN $giamin AND $giamax";
-    }
-}
 $listSanPham = mysqli_query($conn, $querry);
 
 
@@ -109,23 +92,7 @@ $listSanPham = mysqli_query($conn, $querry);
                                 </ul>
                             </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <h4 class="mb-2">Giá</h4>
-                                    <div class="form-group col-md-12">
-                                        <label>Giá từ</label>
-                                        <input class="form-control" placeholder="Min" type="number" name="giamin">
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label>Đến</label>
-                                        <input class="form-control" placeholder="Max" type="number" name="giamax">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-12">
-                                <button id="btnApplyFilter" class="btn btn-block btn-primary">Áp dụng</button>
-                            </div>
+                           
                             
                         </div>
                     </div>
@@ -185,15 +152,7 @@ $listSanPham = mysqli_query($conn, $querry);
         </div>
     </div>
 </div>
-<form method="get" action="product.php" id="duLieuBoLoc" style="display: none">
-            <!-- Đặt input elements cho loaisanpham, hedieuhanh, thuonghieu, ram, rom, giamin, và giamax ở đây -->
-            <input type="hidden" name="loaisanpham" value="" />
-            
-            <input type="hidden" name="giamin" value="" />
-            <input type="hidden" name="giamax" value="" />
-            <!-- Nút gửi form -->
-            <button name="filter" type="submit">Gửi</button>
-        </form>
+
 <!-- Poster End -->
 
 <?php include 'footer.php' ?>
@@ -205,29 +164,7 @@ $listSanPham = mysqli_query($conn, $querry);
     }
 </style>
 <script>
-   $(document).ready(function () {
-    $('#btnApplyFilter').click(function (e) {
-        e.preventDefault();
-        
-        var LSP = [];
-        $('input[name=loaiSanPham]:checked').each(function () {
-            LSP.push($(this).val());
-        });
-        
-        var Gmin = $("input[name='giaMin']").val();
-        var Gmax = $("input[name='giaMax']").val();
-        
-        if (Gmax === '') {
-            Gmax = 999999;
-        }
-        
-        $("input[name='loaisanpham']").val(LSP.join(','));
-        $("input[name='giamin']").val(Gmin);
-        $("input[name='giamax']").val(Gmax);
-
-        $('button[name="filter"]').click();
-    });
-});
+   
     function addToCart(masp) {
     var soluong = 1;
     $.ajax({
