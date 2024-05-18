@@ -1,7 +1,20 @@
 <?php
 include 'header_admin.php';
 include 'db_connect.php';
+
+// Xử lý tìm kiếm
+$input = isset($_GET['input']) ? $_GET['input'] : '';
+
+// Truy vấn cơ sở dữ liệu để lấy danh sách sản phẩm
+$query = "SELECT s.MASP, s.TENSP, s.SOLUONG, s.GIA, s.SALE, s.ANH, t.TENTH, l.TENLSP
+    FROM sanpham s
+    INNER JOIN thuonghieu t ON s.MATH = t.MATH
+    INNER JOIN loaisanpham l ON s.MALSP = l.MALSP
+    WHERE s.TENSP LIKE '%$input%'
+    ORDER BY s.MASP DESC";
+$result = mysqli_query($conn, $query);
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -19,16 +32,18 @@ include 'db_connect.php';
     <div class="page-wrapper">   
         <div style="margin-bottom: 10px; margin-left: 20px ">
             <h1>Danh sách sản phẩm</h1>
-            <a href="./product_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
+            
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="./product_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
+                <form action="" method="get" class="d-flex mr-4">
+                    <input type="text" name="input" value="<?php echo $input; ?>" 
+                        placeholder="Tìm kiếm" class="form-control me-2">
+                    <button type="submit" class="btn btn-primary">Tìm</button>
+                </form>
+            </div>
         </div>
-        <?php
-        // Truy vấn cơ sở dữ liệu để lấy danh sách sản phẩm
-        $query = "SELECT s.MASP, s.TENSP, s.SOLUONG, s.GIA, s.SALE, s.ANH, t.TENTH, l.TENLSP
-            FROM sanpham s
-            INNER JOIN thuonghieu t ON s.MATH = t.MATH
-            INNER JOIN loaisanpham l ON s.MALSP = l.MALSP ORDER BY s.MASP DESC";
-            $result = mysqli_query($conn, $query);
 
+        <?php
         // Kiểm tra và hiển thị danh sách sản phẩm
         if (mysqli_num_rows($result) > 0) {
             echo '<table class="table" style="color: black;">';

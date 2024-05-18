@@ -87,35 +87,33 @@ require 'db_connect.php';
                 </div>                
             </div>
             <div class="card">
-                <div class="card-body">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <!-- Đưa chọn năm vào góc phải -->
-                            <label class="mr-2" style="padding: 10px;">Chọn năm: </label>
-                            <select class="form-control input-sm" id="select_year">
-                                <?php
-                                for ($i = 2020; $i <= 2065; $i++) {
-                                    $selected = ($i == $year) ? 'selected' : '';
-                                    echo "<option value='" . $i . "' " . $selected . ">" . $i . "</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </form>
-                    <div class=" mt-2" ></div>
-                        <div id="legend" class="text-center"></div>
-                        <canvas id="barChart" width="1150" height="500"></canvas>
-                        <div id="debug-months"></div>
-                        <div id="debug-sales"></div>
-                    </div>
-
-                </div>
+            <div class="card-body">
+    <form class="form-inline">
+        <div class="form-group">
+            <label class="mr-2" style="padding: 10px;">Chọn năm: </label>
+            <select class="form-control input-sm" id="select_year">
+                <?php
+                $currentYear = date('Y');
+                for ($i = $currentYear - 1; $i <= $currentYear + 10; $i++) {
+                    $selected = ($i == $year) ? 'selected' : '';
+                    echo "<option value='" . $i . "' " . $selected . ">" . $i . "</option>";
+                }
+                ?>
+            </select>
         </div>
-    </div>
-    <?php
+    </form>
+    <div class="mt-2"></div>
+    <div id="legend" class="text-center"></div>
+    <canvas id="barChart" width="1150" height="500"></canvas>
+    <div id="debug-months"></div>
+    <div id="debug-sales"></div>
+</div>
+
+<?php
+$year = isset($_GET['year']) ? $_GET['year'] : date('Y');
 $months = array();
 $sales = array();
-$totalRevenue = 0; // Thêm biến để lưu tổng doanh thu
+$totalRevenue = 0;
 
 // Khởi tạo mảng giá trị ban đầu cho tất cả 12 tháng
 for ($m = 1; $m <= 12; $m++) {
@@ -130,17 +128,14 @@ $stmt = $conn->prepare("SELECT MONTH(hoadon.NGAYTAO) AS month, SUM(chitiethoadon
                         LEFT JOIN sanpham ON sanpham.MASP=chitiethoadon.MASP 
                         WHERE YEAR(hoadon.NGAYTAO)=? AND hoadon.TINHTRANGDONHANG='Giao hàng thành công'
                         GROUP BY MONTH(hoadon.NGAYTAO)");
-$stmt->bind_param("s", $_GET['year']);
+$stmt->bind_param("s", $year);
 $stmt->execute();
-
 
 $result = $stmt->get_result();
 
 // Lấy dữ liệu từ kết quả truy vấn và đưa vào mảng
 while ($srow = $result->fetch_assoc()) {
-    // Sử dụng $srow['month'] để đặt giá trị vào đúng vị trí trong mảng
     $sales[$srow['month'] - 1] = round($srow['total'], 2);
-    // Tính tổng doanh thu
     $totalRevenue += $srow['total'];
 }
 
@@ -152,16 +147,12 @@ $sales = json_encode($sales);
 
 <!-- End Chart Data -->
 
-
 <!-- Hiển thị tổng doanh thu -->
-<div style="text-align: center;" ><b>Tổng doanh thu: <?php echo number_format($totalRevenue,); ?> VNĐ</b></div>
-            </div>
-
+<div style="text-align: center;"><b>Tổng doanh thu: <?php echo number_format($totalRevenue); ?> VNĐ</b></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    // Hàm để vẽ đồ thị
     function drawChart() {
         var barChartCanvas = $('#barChart').get(0).getContext('2d');
         var barChartData = {
@@ -201,49 +192,30 @@ $sales = json_encode($sales);
         sessionStorage.setItem('chartDrawn', 'true');
     }
 
-    // Kiểm tra nếu đã vẽ đồ thị trước đó từ session storage
-    var chartDrawn = sessionStorage.getItem('chartDrawn');
-    if (!chartDrawn) {
-        // Nếu chưa vẽ đồ thị, gọi hàm vẽ đồ thị
-        drawChart();
-    }
-</script>
-<script>
-   $(function () {
-    // Hàm để thay đổi trang và lưu giá trị vào localStorage
-    function changeYearAndSave(value) {
-        window.location.href = 'Index.php?year=' + value;
-        localStorage.setItem('selectedYear', value);
-    }
+    $(function () {
+        // Lấy năm hiện tại
+        var currentYear = <?php echo date('Y'); ?>;
+        var selectedYear = <?php echo $year; ?>;
 
-    // Lắng nghe sự kiện thay đổi của select
-    $('#select_year').change(function () {
-        // Gọi hàm thực hiện cả hai công việc
-        changeYearAndSave($(this).val());
-    });
-
-    // Lấy giá trị năm từ localStorage khi trang được tải
-    var selectedYear = localStorage.getItem('selectedYear');
-    
-    // Nếu có giá trị năm, thiết lập giá trị mặc định cho select
-    if (selectedYear) {
+        // Thiết lập giá trị mặc định cho dropdown
         $('#select_year').val(selectedYear);
-    } else {
-        // Nếu không có giá trị năm trong localStorage, thì kiểm tra trên URL
-var urlParams = new URLSearchParams(window.location.search);
-        var yearFromURL = urlParams.get('year');
-        
-        if (yearFromURL) {
-            // Nếu có giá trị năm trên URL, thiết lập giá trị cho select
-            $('#select_year').val(yearFromURL);
-        } else {
-            // Nếu không có giá trị năm trên URL, mặc định là 2020
-            $('#select_year').val('2020');
-        }
-    }
-});
-</script>
 
+        // Gọi hàm vẽ biểu đồ
+        drawChart();
+
+        // Lắng nghe sự kiện thay đổi của select
+        $('#select_year').change(function () {
+            // Gọi hàm thay đổi năm và lưu vào localStorage
+            changeYearAndSave($(this).val());
+        });
+
+        // Hàm để thay đổi trang và lưu giá trị vào localStorage
+        function changeYearAndSave(value) {
+            window.location.href = 'Index.php?year=' + value;
+            localStorage.setItem('selectedYear', value);
+        }
+    });
+</script>
 <?php
 
 include 'footer_admin.php';

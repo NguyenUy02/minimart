@@ -278,18 +278,22 @@ $(function(){
     var id = $(this).data('id');
     
     $.ajax({
-      type: 'POST',
-      url: 'Print_order.php',
-      data: {id:id},
-      dataType: 'json',
-      success:function(response){
+    type: 'POST',
+    url: 'Print_order.php',
+    data: {id:id},
+    dataType: 'json',
+    success:function(response){
+        if (response.status === 'success') {
+            alert(response.message);
+        } else {
+            alert(response.message);
+        }
         $('#ngaytao').html(response.ngaytao);
         $('#maHD').html(response.maHD);
         $('#detail').html(response.list);
         $('#total').html(response.total);
-      }
-      
-    });
+    }
+});
   });
 
   $("#chitiethoadon").on("hidden.bs.modal", function () {

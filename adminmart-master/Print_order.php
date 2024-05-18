@@ -51,8 +51,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $desktopPath = 'D:\\';
     $filename = $desktopPath . 'hoa_don_' . $id . '_' . date('YmdHis') . '.xlsx';
     $writer = new Xlsx($spreadsheet);
-    $writer->save($filename);
-
+    try {
+        $writer->save($filename);
+        $response = array(
+            'status' => 'success',
+            'message' => 'Đã in hóa đơn và lưu tại đường dẫn: ' . $filename
+        );
+    } catch (Exception $e) {
+        $response = array(
+            'status' => 'error',
+            'message' => 'Đã xảy ra lỗi khi in hóa đơn: ' . $e->getMessage()
+        );
+    }
     
+    echo json_encode($response);
 }
-
+?>

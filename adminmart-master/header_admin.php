@@ -110,6 +110,11 @@ if(!isset($_SESSION['MAAD']))
                                     class="hide-menu">Hóa đơn
                                 </span></a>
                         </li>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="barcode_scanner.php"
+                                aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
+                                    class="hide-menu">Quét thanh toán
+                                </span></a>
+                        </li>
 
                         <li class="nav-small-cap"><span class="hide-menu">Thống kê</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="statictis.php"
