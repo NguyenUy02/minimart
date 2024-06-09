@@ -69,41 +69,41 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung
                                         </div>
                                     </div>
                                     <script>
-    $(document).ready(function() {
-        var avatarImg = $('.icontext .avatar-img');
-        var avatarInput = $('#avatar-input');
-        var MAND = '<?php echo $row['MAND']; ?>';
+                                        $(document).ready(function() {
+                                            var avatarImg = $('.icontext .avatar-img');
+                                            var avatarInput = $('#avatar-input');
+                                            var MAND = '<?php echo $row['MAND']; ?>';
 
-        // Kiểm tra nếu đã có ảnh được chọn từ trước
-        if (localStorage.getItem('selectedAvatar_' + MAND)) {
-            avatarImg.attr('src', localStorage.getItem('selectedAvatar_' + MAND));
-        }
+                                            // Kiểm tra nếu đã có ảnh được chọn từ trước
+                                            if (localStorage.getItem('selectedAvatar_' + MAND)) {
+                                                avatarImg.attr('src', localStorage.getItem('selectedAvatar_' + MAND));
+                                            }
 
-        avatarInput.change(function() {
-            var input = this;
+                                            avatarInput.change(function() {
+                                                var input = this;
 
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var newAvatarUrl = e.target.result;
-                    avatarImg.attr('src', newAvatarUrl);
-                    localStorage.setItem('selectedAvatar_' + MAND, newAvatarUrl);
+                                                if (input.files && input.files[0]) {
+                                                    var reader = new FileReader();
+                                                    reader.onload = function(e) {
+                                                        var newAvatarUrl = e.target.result;
+                                                        avatarImg.attr('src', newAvatarUrl);
+                                                        localStorage.setItem('selectedAvatar_' + MAND, newAvatarUrl);
 
-                    // Gửi đường dẫn ảnh đã chọn lên máy chủ để lưu vào tệp tin
-                    $.ajax({
-                        url: 'user_avatar.php', // Đường dẫn đến file PHP xử lý việc lưu ảnh
-                        type: 'POST',
-                        data: { avatarUrl: newAvatarUrl },
-                        success: function(response) {
-                            // Xử lý kết quả sau khi lưu ảnh thành công
-                        }
-                    });
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        });
-    });
-</script>
+                                                        // Gửi đường dẫn ảnh đã chọn lên máy chủ để lưu vào tệp tin
+                                                        $.ajax({
+                                                            url: 'user_avatar.php', // Đường dẫn đến file PHP xử lý việc lưu ảnh
+                                                            type: 'POST',
+                                                            data: { avatarUrl: newAvatarUrl },
+                                                            success: function(response) {
+                                                                // Xử lý kết quả sau khi lưu ảnh thành công
+                                                            }
+                                                        });
+                                                    };
+                                                    reader.readAsDataURL(input.files[0]);
+                                                }
+                                            });
+                                        });
+                                    </script>
                                 </figure>                           
                                 <hr>  <!-- gạch ngang -->
                                 <p>

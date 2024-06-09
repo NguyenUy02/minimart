@@ -4,7 +4,6 @@ include 'header.php';
 
 ?>
 <title>Lịch sử đặt hàng</title>
-
         <div class="container-fluid fruite py-5">
             <div class="container py-5">
                 <h1 class="mb-4 text-white">Thông tin cá nhân</h1>
@@ -29,14 +28,12 @@ include 'header.php';
                         <div class="col-lg-9"><H2>Lịch sử đặt hàng</H2>   
                             <!-- <div class="col-lg-12"> -->  
                             <?php
-                $tt_hd = mysqli_query($conn, "SELECT hoadon.*, nguoidung.*
-                FROM hoadon
-                JOIN nguoidung ON hoadon.MAND = nguoidung.MAND
-                
-                WHERE hoadon.MAND = '{$_SESSION['MAND']}'
-                ORDER BY hoadon.MAHD DESC");
-
-                ?>                       
+                                $tt_hd = mysqli_query($conn, "SELECT hoadon.*, nguoidung.*
+                                FROM hoadon
+                                JOIN nguoidung ON hoadon.MAND = nguoidung.MAND   
+                                WHERE hoadon.MAND = '{$_SESSION['MAND']}'
+                                ORDER BY hoadon.MAHD DESC");
+                            ?>                       
                             <?php if (mysqli_num_rows($tt_hd) <> 0): ?>
                     <?php while ($row = mysqli_fetch_assoc($tt_hd)): ?>
                         <?php

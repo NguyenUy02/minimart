@@ -63,7 +63,9 @@ if (isset($_POST['TENND']) && isset($_POST['SDT'])  && isset($_POST['MATKHAU'])
     } else if (empty($diachi)) {
         header("Location: register.php?error=Địa chỉ là bắt buộc&$user_data");
         exit();
-        
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header("Location: register.php?error=Địa chỉ email không hợp lệ&$user_data");
+        exit();    
     } else {
         $sql = "SELECT * FROM nguoidung WHERE SDT='$sdt' ";
         $result = mysqli_query($conn, $sql);
