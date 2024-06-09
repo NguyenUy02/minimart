@@ -109,15 +109,15 @@ include 'header.php';
             <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
                 <div class="bg-light rounded" style="color: black;">
                     <div class="p-4">
-                        <h1 class="display-6 mb-4">Tổng hóa đơn</h1>
+                        <h1 class="display-6 mb-2">Tổng hóa đơn</h1>
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="mb-0 me-4">Tổng tiền:</h5>
                             <strong class="mb-0" id="TongTien">0</strong>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <!-- <div class="d-flex justify-content-between">
                             <h5 class="mb-0 me-4">Phí</h5>                        
                                 <p class="mb-0">Vận chuyển: </p>       
-                        </div>
+                        </div> -->
                     </div>
                     <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                         <h5 class="mb-0 ps-4 me-4">Thành tiền</h5>

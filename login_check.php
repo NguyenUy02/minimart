@@ -33,7 +33,7 @@ if (isset($_POST['SDT']) && isset($_POST['MATKHAU'])) {
 				$_SESSION['GIOITINH'] = $row['GIOITINH'];
                 $_SESSION['SDT'] = $row['SDT'];
                 $_SESSION['DIACHI'] = $row['DIACHI'];
-                
+                $_SESSION['EMAIL'] = $row['EMAIL'];
 
                 $slgh = "SELECT COUNT(giohang.SOLUONG) AS total FROM giohang JOIN nguoidung ON giohang.MAND = nguoidung.MAND WHERE giohang.MAND = '{$row['MAND']}'";
                 $result = mysqli_query($conn, $slgh);
@@ -48,9 +48,20 @@ if (isset($_POST['SDT']) && isset($_POST['MATKHAU'])) {
 				$_SESSION['GIOITINH'] = $row['GIOITINH'];
                 $_SESSION['SDT'] = $row['SDT'];
                 $_SESSION['DIACHI'] = $row['DIACHI'];
+                $_SESSION['EMAIL'] = $row['EMAIL'];
                 
                 header("Location: adminmart-master/index.php");
             } 
+            elseif($row['MATKHAU'] === $matkhau && $row['SDT'] === $sdt && $row['ISADMIN'] ==2){
+                $_SESSION['TENND'] = $row['TENND'];
+                $_SESSION['MANV'] = $row['MAND'];
+				$_SESSION['GIOITINH'] = $row['GIOITINH'];
+                $_SESSION['SDT'] = $row['SDT'];
+                $_SESSION['DIACHI'] = $row['DIACHI'];
+                $_SESSION['EMAIL'] = $row['EMAIL'];
+                
+                header("Location: adminmart-master/index.php");
+            }
             else {
                 header("Location: login.php?error=Sai tên đăng nhập hoặc mật khẩu&$user_data");
                 exit();

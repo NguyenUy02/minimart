@@ -91,9 +91,7 @@ $listSanPham = mysqli_query($conn, $querry);
                                     ?>
                                 </ul>
                             </div>
-                            </div>
-                           
-                            
+                            </div>                            
                         </div>
                     </div>
                     <div class="col-lg-10">

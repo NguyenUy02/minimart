@@ -15,9 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
           FROM hoadon h JOIN nguoidung nd ON h.MAND = nd.MAND
           JOIN chitiethoadon c ON h.MAHD = c.MAHD
           WHERE h.MAHD LIKE '%$input%' 
-              OR nd.TENND LIKE '%$input%'               
+              OR nd.TENND LIKE '%$input%'  
+              OR nd.SDT LIKE '%$input%'             
               OR h.TINHTRANGDONHANG LIKE '%$input%'
-              OR h.NGAYTAO LIKE '%$input%'
           GROUP BY h.MAHD, nd.TENND, nd.SDT, nd.DIACHI, h.NGAYTAO, h.TINHTRANGDONHANG
           ORDER BY h.NGAYTAO DESC";
 } else {

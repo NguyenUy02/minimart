@@ -20,7 +20,7 @@ include 'db_connect.php';
     <div class="page-wrapper">
         <div style="margin-bottom: 10px; margin-left: 20px ">
             <h1>Danh sách Khách hàng</h1>
-            <a href="./user_add.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
+            <a href="../register.php"><button class="btn btn-primary btn-sm add btn-flat"><i class="fa fa-plus"></i> Thêm</button></a>
         </div>
 
         <?php
@@ -54,7 +54,7 @@ include 'db_connect.php';
                 echo '<td>' . $row['EMAIL'] . '</td>';
                 echo '<td>';
                 echo '<a href="./user_edit.php?maND=' . $row['MAND'] . '"><button class="btn btn-success btn-sm edit btn-flat"><i class="fa fa-edit"></i> Sửa</button></a>';
-                echo '<a href="./user_delete.php?maND=' . $row['MAND'] . '"><button class="btn btn-danger btn-sm delete btn-flat"><i class="fa fa-trash"></i> Xoá</button></a>';
+                echo '<a href="./user_delete.php?maND=' . $row['MAND'] . '"><button class="btn btn-danger btn-sm delete btn-flat"><i class="fa fa-times"></i> Xóa</button></a>';
                 echo '</td>';
                 echo '</tr>';
             }

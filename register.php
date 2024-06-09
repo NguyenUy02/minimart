@@ -29,6 +29,11 @@
                 <input type="text" class="form-control" name="SDT" id="SDT" value="<?php if (isset($_GET['SDT']))
                 echo $_GET['SDT'] ?>">
             </div>
+            <div class="form-group">
+                <label for="SDT">Email khôi phục</label>
+                <input type="text" class="form-control" name="EMAIL" id="EMAIL" value="<?php if (isset($_GET['EMAIL']))
+                echo $_GET['EMAIL'] ?>">
+            </div>
             <div class="form-row">
                 <div class="form-group">
                     <label for="MATKHAU">Mật khẩu</label>
@@ -41,23 +46,20 @@
                 </div>
             </div>
             <div class="form-group">
-            <div class="form-group col-md-6">
-    <label for="GIOITINH">Giới Tính</label><br>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="GIOITINH" id="GIOITINH-nam" value="Nam"
-            <?php if (isset($_GET['GIOITINH']) && $_GET['GIOITINH'] === 'Nam') echo 'checked'; ?>>
-        <label class="form-check-label" for="GIOITINH-nam">
-            Nam
-        </label>
-    </div>
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="GIOITINH" id="GIOITINH-nu" value="Nữ"
-            <?php if (isset($_GET['GIOITINH']) && $_GET['GIOITINH'] === 'Nữ') echo 'checked'; ?>>
-        <label class="form-check-label" for="GIOITINH-nu">
-            Nữ
-        </label>
-    </div>
-</div>  
+                <div class="form-group col-md-6">
+                    <label for="GIOITINH">Giới Tính</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="GIOITINH" id="GIOITINH-nam" value="Nam"
+                            <?php if (isset($_GET['GIOITINH']) && $_GET['GIOITINH'] === 'Nam') echo 'checked'; ?>>
+                        <label class="form-check-label" for="GIOITINH-nam">Nam </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="GIOITINH" id="GIOITINH-nu" value="Nữ"
+                            <?php if (isset($_GET['GIOITINH']) && $_GET['GIOITINH'] === 'Nữ') echo 'checked'; ?>>
+                        <label class="form-check-label" for="GIOITINH-nu">Nữ</label>
+                    </div>
+                </div>  
+            </div>
 
             <div class="form-group">
                 <label for="DIACHI">Địa chỉ</label>

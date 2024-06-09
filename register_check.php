@@ -4,7 +4,8 @@ include ("connect.php");
 if (isset($_POST['TENND']) && isset($_POST['SDT'])  && isset($_POST['MATKHAU']) 
     && isset($_POST['CONFIRM-MATKHAU']) 
     && isset($_POST['GIOITINH']) 
-    && isset($_POST['DIACHI'])  ) {
+    && isset($_POST['DIACHI'])
+    && isset($_POST['EMAIL'])  ) {
     function LayMaND($db) {
         // Lấy danh sách các MAND từ bảng nguoidung
         $query = "SELECT MAND FROM nguoidung";
@@ -39,9 +40,10 @@ if (isset($_POST['TENND']) && isset($_POST['SDT'])  && isset($_POST['MATKHAU'])
     $confirm_password = validate($_POST['CONFIRM-MATKHAU']);
     $gioitinh = validate($_POST['GIOITINH']); 
     $diachi = validate($_POST['DIACHI']);
+    $email = validate($_POST['EMAIL']);
     $isadmin = 0;
     $user_data = 'TENND=' . $tennd . '&SDT=' . $sdt . '&MATKHAU=' . $matkhau . '&CONFIRM-MATKHAU=' . $confirm_password 
-    . '&gioitinh=' . $gioitinh  . '&DIACHI=' . $diachi;
+    . '&gioitinh=' . $gioitinh  . '&DIACHI=' . $diachi . '&EMAIL=' . $email;
 
     if (empty($tennd)) {
         header("Location: register.php?error=tên là bắt buộc&$user_data");
@@ -61,6 +63,7 @@ if (isset($_POST['TENND']) && isset($_POST['SDT'])  && isset($_POST['MATKHAU'])
     } else if (empty($diachi)) {
         header("Location: register.php?error=Địa chỉ là bắt buộc&$user_data");
         exit();
+        
     } else {
         $sql = "SELECT * FROM nguoidung WHERE SDT='$sdt' ";
         $result = mysqli_query($conn, $sql);
@@ -69,8 +72,8 @@ if (isset($_POST['TENND']) && isset($_POST['SDT'])  && isset($_POST['MATKHAU'])
             header("Location: register.php?error=Số điện đã được sử dụng$user_data");
             exit();
         } else {
-            $sql3 = "INSERT INTO nguoidung(MAND, TENND, SDT, MATKHAU,  GIOITINH,  DIACHI, ISADMIN) 
-            VALUES('$mand', '$tennd', '$sdt', '$matkhau',  '$gioitinh',  '$diachi', '0')";
+            $sql3 = "INSERT INTO nguoidung(MAND, TENND, SDT, MATKHAU, email,  GIOITINH,  DIACHI, ISADMIN) 
+            VALUES('$mand', '$tennd', '$sdt', '$matkhau', '$email', '$gioitinh',  '$diachi', '0')";
             $result3 = mysqli_query($conn, $sql3);
 
             if ($result3) {

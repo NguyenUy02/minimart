@@ -158,8 +158,8 @@ $sales = json_encode($sales);
         var barChartData = {
             labels: <?php echo $months; ?>,
             datasets: [
-                {
-                    label: 'Doanh thu',
+                {   
+                    label: "Doanh thu",
                     backgroundColor: 'rgba(153, 102, 255, 0.9)',
                     borderColor: 'rgba(60,141,188,0.8)',
                     pointRadius: false,
